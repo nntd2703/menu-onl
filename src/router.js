@@ -25,19 +25,19 @@ export default function SetupRouter() {
     return (
         <Router>
             <div>
-                <AuthButton />
+                {/*<AuthButton />*/}
 
-                <ul>
-                    <li>
-                        <Link to="/order-online/:id">Public Page</Link>
-                    </li>
-                    <li>
-                        <Link to="/user-manage">Protected Page</Link>
-                    </li>
-                    <li>
-                        <Link to="/login">Protected Page</Link>
-                    </li>
-                </ul>
+                {/*<ul>*/}
+                {/*    <li>*/}
+                {/*        <Link to="/order-online/:id">Public Page</Link>*/}
+                {/*    </li>*/}
+                {/*    <li>*/}
+                {/*        <Link to="/user-manage">Protected Page</Link>*/}
+                {/*    </li>*/}
+                {/*    <li>*/}
+                {/*        <Link to="/login">Protected Page</Link>*/}
+                {/*    </li>*/}
+                {/*</ul>*/}
 
                 <Switch>
                     <Route exact path="/">
@@ -123,10 +123,10 @@ function LoginPage() {
     };
 
     return (
-        <div>
-            <p>You must log in to view the page at {from.pathname}</p>
-            <LoginComponent loginClicked={login}/>
-        </div>
+        <LoginComponent loginClicked={login}/>
+        // <div>
+        //     <p>You must log in to view the page at {from.pathname}</p>
+        // </div>
     );
 }
 

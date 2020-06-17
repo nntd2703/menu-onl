@@ -1,2 +1,3 @@
-@import "../styles/css/components/HomeLayout/style.css";
-@import "../styles/css/components/Login/style.css";
+@import "../styles/css/components/HomeLayout/styles.css";
+@import "../styles/css/components/Login/styles.css";
+@import "../styles/css/components/Loading/styles.css";
