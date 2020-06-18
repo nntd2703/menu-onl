@@ -4,6 +4,10 @@ import App from './App';
 import "./styles/bundle.css";
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import dotenv from 'dotenv';
+import "core-js/stable";
+import "regenerator-runtime/runtime";
+dotenv.config();
 
 ReactDOM.render(
   <React.StrictMode>

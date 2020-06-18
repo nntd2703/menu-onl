@@ -25,31 +25,43 @@ export default function SetupRouter() {
     return (
         <Router>
             <div>
-                <AuthButton />
+                {/*<AuthButton />*/}
 
-                <ul>
-                    <li>
-                        <Link to="/order-online/:id">Public Page</Link>
-                    </li>
-                    <li>
-                        <Link to="/user-manage">Protected Page</Link>
-                    </li>
-                    <li>
-                        <Link to="/login">Protected Page</Link>
-                    </li>
-                </ul>
+                {/*<ul>*/}
+                {/*    <li>*/}
+                {/*        <Link to="/">Public Page</Link>*/}
+                {/*    </li>*/}
+                {/*    <li>*/}
+                {/*        <Link to="/">Public Page</Link>*/}
+                {/*    </li>*/}
+                {/*    <li>*/}
+                {/*        <Link to="/">Public Page</Link>*/}
+                {/*    </li>*/}
+                {/*    <li>*/}
+                {/*        <Link to="/">Public Page</Link>*/}
+                {/*    </li>*/}
+                {/*    <li>*/}
+                {/*        <Link to="/">Public Page</Link>*/}
+                {/*    </li>*/}
+                {/*    <li>*/}
+                {/*        <Link to="/login">Login Page</Link>*/}
+                {/*    </li>*/}
+                {/*    <li>*/}
+                {/*        <Link to="/user-manage">Protected Page</Link>*/}
+                {/*    </li>*/}
+                {/*</ul>*/}
 
                 <Switch>
                     <Route exact path="/">
                         <Home />
                     </Route>
-                    <Route path="/login">
+                    <Route exact path="/login">
                         <LoginPage />
                     </Route>
-                    <Route path="/order-online">
+                    <Route exact path="/order-online">
                         <FoodOrder />
                     </Route>
-                    <PrivateRoute path="/user-manage">
+                    <PrivateRoute exact path="/user-manage">
                         <UserManagement />
                     </PrivateRoute>
                 </Switch>
@@ -130,3 +142,7 @@ function LoginPage() {
     );
 }
 
+// "start": "webpack-dev-server --open",
+// "webpack-dev-server --mode development",
+//
+// SKIP_PREFLIGHT_CHECK=true

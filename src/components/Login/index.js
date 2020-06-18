@@ -138,7 +138,7 @@ class LoginComponent extends Component {
                                             {errors.password}
                                         </Form.Control.Feedback>
                                     </FormGroup>
-                                    {error ? <Form.Label class="error-message">
+                                    {error ? <Form.Label className="error-message">
                                         {ERROR_MESSAGE.incorrectLogin}
                                     </Form.Label> : null}
                                     <input type="submit" className="fadeIn fourth" value="Đăng nhập"/>

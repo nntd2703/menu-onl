@@ -5,7 +5,7 @@ class HomeLayout extends Component {
     render() {
         return (
             <>
-                <HeaderComponent></HeaderComponent>
+                <HeaderComponent />
             </>
         );
     }

@@ -3,7 +3,9 @@ import SetupRouter from "./router";
 
 function App() {
     return (
-        <SetupRouter />
+        <div>
+            <SetupRouter />
+        </div>
     );
 }
 
