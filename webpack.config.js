@@ -23,8 +23,12 @@ module.exports = () => {
         entry: './src/index.js',
         output: {
             path: path.resolve(__dirname, 'dist'),
-            filename: 'bundle.js',
-            publicPath: '/',
+            filename: 'index_bundle.js',
+            chunkFilename: '[id].js',
+            publicPath: ''
+        },
+        resolve: {
+            extensions: ['.js', '.jsx']
         },
         optimization: {
             minimize: false
@@ -68,20 +72,22 @@ module.exports = () => {
         },
         mode: isProduction ? 'production' : 'development',
         devServer: {
-            // contentBase: path.join(__dirname, 'dist'),
-            // publicPath: 'http://localhost:3000/',
-            // compress: true,
-            // port: 3000,
-            // hot: true,
+            contentBase: path.join(__dirname, 'dist'),
+            publicPath: 'http://localhost:3000/',
+            compress: true,
+            port: 3000,
+            hot: true,
             historyApiFallback: true,
           },
         plugins: [
             new CleanWebpackPlugin({
-                cleanOnceBeforeBuildPatterns: ['dist/js', 'dist/css'],
+                cleanOnceBeforeBuildPatterns: ['dist/fonts', 'dist/images'],
             }),
             new webpack.DefinePlugin(envKeys),
             new HtmlWebpackPlugin({
                 template: 'public/index.html',
+                filename: 'index.html',
+                inject: 'body'
             })
         ]
     }
