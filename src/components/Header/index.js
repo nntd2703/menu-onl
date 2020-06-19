@@ -1,6 +1,52 @@
 import React, {Component} from 'react';
+import $ from 'jquery';
 
 class HeaderComponent extends Component {
+    componentDidMount(){
+        /*[ Fixed Header ]
+        ===========================================================*/
+        var header = $('header');
+        var logo = $(header).find('.logo img');
+        var linkLogo1 = $(logo).attr('src');
+        var linkLogo2 = $(logo).data('logofixed');
+
+
+        $(window).on('scroll',function(){
+            if($(this).scrollTop() > 5 && $(this).width() > 992) {
+                $(logo).attr('src',linkLogo2);
+                $(header).addClass('header-fixed');
+            }
+            else {
+                $(header).removeClass('header-fixed');
+                $(logo).attr('src',linkLogo1);
+            }
+
+        });
+        $( document ).ready(function() {
+            $('body').append('<div class="overlay-sidebar trans-0-4"></div>');
+            var ovlSideBar = $('.overlay-sidebar');
+            var btnShowSidebar = $('.btn-show-sidebar');
+            var btnHideSidebar = $('.btn-hide-sidebar');
+            var sidebar = $('.sidebar');
+
+            $(btnShowSidebar).on('click', function(){
+                $(sidebar).addClass('show-sidebar');
+                $(ovlSideBar).addClass('show-overlay-sidebar');
+            });
+
+            $(btnHideSidebar).on('click', function(){
+                $(sidebar).removeClass('show-sidebar');
+                $(ovlSideBar).removeClass('show-overlay-sidebar');
+            });
+
+            $(ovlSideBar).on('click', function(){
+                $(sidebar).removeClass('show-sidebar');
+                $(ovlSideBar).removeClass('show-overlay-sidebar');
+            })
+
+        });
+    }
+
     render() {
         return (
             <>
@@ -104,47 +150,47 @@ class HeaderComponent extends Component {
                         <div className="wrap-gallery-sidebar flex-w">
                             <a className="item-gallery-sidebar wrap-pic-w" href="images/photo-gallery-01.jpg"
                                data-lightbox="gallery-footer">
-                                <img src="images/photo-gallery-thumb-01.jpg" alt="GALLERY"/>
+                                <img src={require('../../images/photo-gallery-thumb-01.jpg')} alt="GALLERY"/>
                             </a>
 
                             <a className="item-gallery-sidebar wrap-pic-w" href="images/photo-gallery-02.jpg"
                                data-lightbox="gallery-footer">
-                                <img src="images/photo-gallery-thumb-02.jpg" alt="GALLERY"/>
+                                <img src={require('../../images/photo-gallery-thumb-02.jpg')}alt="GALLERY"/>
                             </a>
 
                             <a className="item-gallery-sidebar wrap-pic-w" href="images/photo-gallery-03.jpg"
                                data-lightbox="gallery-footer">
-                                <img src="images/photo-gallery-thumb-03.jpg" alt="GALLERY"/>
+                                <img src={require('../../images/photo-gallery-thumb-03.jpg')}alt="GALLERY"/>
                             </a>
 
                             <a className="item-gallery-sidebar wrap-pic-w" href="images/photo-gallery-05.jpg"
                                data-lightbox="gallery-footer">
-                                <img src="images/photo-gallery-thumb-05.jpg" alt="GALLERY"/>
+                                <img src={require('../../images/photo-gallery-thumb-05.jpg')}alt="GALLERY"/>
                             </a>
 
                             <a className="item-gallery-sidebar wrap-pic-w" href="images/photo-gallery-06.jpg"
                                data-lightbox="gallery-footer">
-                                <img src="images/photo-gallery-thumb-06.jpg" alt="GALLERY"/>
+                                <img src={require('../../images/photo-gallery-thumb-06.jpg')}alt="GALLERY"/>
                             </a>
 
                             <a className="item-gallery-sidebar wrap-pic-w" href="images/photo-gallery-07.jpg"
                                data-lightbox="gallery-footer">
-                                <img src="images/photo-gallery-thumb-07.jpg" alt="GALLERY"/>
+                                <img src={require('../../images/photo-gallery-thumb-07.jpg')}alt="GALLERY"/>
                             </a>
 
                             <a className="item-gallery-sidebar wrap-pic-w" href="images/photo-gallery-09.jpg"
                                data-lightbox="gallery-footer">
-                                <img src="images/photo-gallery-thumb-09.jpg" alt="GALLERY"/>
+                                <img src={require('../../images/photo-gallery-thumb-09.jpg')}alt="GALLERY"/>
                             </a>
 
                             <a className="item-gallery-sidebar wrap-pic-w" href="images/photo-gallery-10.jpg"
                                data-lightbox="gallery-footer">
-                                <img src="images/photo-gallery-thumb-10.jpg" alt="GALLERY"/>
+                                <img src={require('../../images/photo-gallery-thumb-10.jpg')}alt="GALLERY"/>
                             </a>
 
                             <a className="item-gallery-sidebar wrap-pic-w" href="images/photo-gallery-11.jpg"
                                data-lightbox="gallery-footer">
-                                <img src="images/photo-gallery-thumb-11.jpg" alt="GALLERY"/>
+                                <img src={require('../../images/photo-gallery-thumb-11.jpg')}alt="GALLERY"/>
                             </a>
                         </div>
                     </div>

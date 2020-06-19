@@ -3594,6 +3594,8 @@ SHAPE SHAPE SHAPE SHAPE SHAPE SHAPE SHAPE SHAPE SHAPE SHAPE
 .bo-rad-5 {border-radius: 5px;}
 .bo-rad-7 {border-radius: 7px;}
 .bo-rad-10 {border-radius: 10px;}
+.bo-rad-20 {border-radius: 20px;}
+.bo-rad-30 {border-radius: 30px;}
 
 .bo-t-rad-2 {
     border-top-left-radius: 2px;
@@ -3693,21 +3695,17 @@ EFFECT   EFFECT   EFFECT   EFFECT   EFFECT   EFFECT  EFFECT
 
 /*!*[ Background pattern ]
 -----------------------------------------------------------
-*!
+
+ */
 .bg1-pattern {
-    background-image: url(../images/icons/pattern1.png);
+    background-image: url(../../images/icons/pattern1.png);
     background-repeat: repeat;
 }
 
 .bg2-pattern {
-    background-image: url(../images/icons/pattern2.png);
+    background-image: url(../../images/icons/pattern2.png);
     background-repeat: repeat;
 }
-
-.bg3-pattern {
-    background-image: url(../images/icons/pattern3.png);
-    background-repeat: repeat;
-}*/
 
 
 /*[ Hover ]
