@@ -1,15 +1,48 @@
 import React, {Component} from 'react';
-import {FaPlusCircle, FaMinusCircle} from "react-icons/fa";
-import {Button, FormControl, InputGroup} from "react-bootstrap";
 import {NavigationItem} from "./NavItem";
 
 
 import ImageMenuHeader from "../../images/header-menu-01.jpg";
 import ImageTitle from "../../images/bg-title-page-01.jpg";
-import DetailImage from "../../images/lunch-01.jpg";
 import $ from "jquery";
+import {Item} from "./Item";
+import {DISHES_DATA} from "../../../dishes-utils";
+import {Form} from "react-bootstrap";
 
 class OrderFood extends Component {
+    constructor(props) {
+        super(props);
+
+        const DISHES_DATA_MENU = DISHES_DATA.Menu;
+        this.DISHES_DATA_MENU = DISHES_DATA_MENU;
+        const type = DISHES_DATA.Type;
+        const data = type.map((item, index) => {
+            const dishesList = [];
+            DISHES_DATA_MENU.forEach((detail) => {
+                const code = detail.Code;
+                if(item.Code === code.substr(0, code.indexOf('-'))) {
+                    dishesList.push({
+                        parentKey: item.Code,
+                        ...detail,
+                    });
+                }
+            });
+            return {
+                key: `tab-${index+1}`,
+                isSelected: index === 0,
+                ...item,
+                dishesList
+            }
+        });
+
+        this.state = {
+            data,
+            findDishesKey: '',
+            navigationLayout: [],
+            tabContentFilterItem: [],
+            tabContentAllItem: [],
+        };
+    }
     componentDidMount() {
         $(document).ready(function () {
             $(window).scroll(function () {
@@ -20,16 +53,65 @@ class OrderFood extends Component {
                 });
             });
         });
+
+        this.handleRenderLayout();
     }
 
+    navOnClicked = (keyItem) => {
+        this.setState(preState => ({
+            data: preState.data.map((item) => {
+                item.isSelected = item.key === keyItem;
+                return item;
+            })
+        }));
+    };
+
+    handleRenderLayout = (findDishesKey) => {
+        const { data, tabContentAllItem } = this.state;
+        const navigationLayout = [];
+        const tabContentFilterItem = [];
+        if (findDishesKey) {
+            const result = this.DISHES_DATA_MENU.filter((item) => {
+                const name = item.Name ? item.Name.toLowerCase() : null;
+                return name ? name.includes(findDishesKey.toLowerCase()) : false;
+            });
+            tabContentFilterItem.push(
+                <div className="tab-content menu-tab-content">
+                    <div className="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="true">
+                        <div className="tab-pane-details row">
+                            {result.map((detail) => (
+                                <Item detail={detail} key={detail.Code} />
+                            ))}
+                        </div>
+                    </div>
+                </div>)
+        } else if (tabContentAllItem.length === 0) {
+            data.forEach((item) => {
+                const { key, isSelected } = item;
+                navigationLayout.push(<NavigationItem item={item} key={item.Code} navOnClicked={this.navOnClicked}/>);
+                tabContentAllItem.push(
+                    <div className="tab-content menu-tab-content">
+                        <div className={`tab-pane fade ${isSelected ? "show active" : null}`} id={key} role="tabpanel" aria-labelledby={key}>
+                            <div className="tab-pane-details row">
+                                {item.dishesList.map((detail) => (
+                                    <Item detail={detail} key={detail.Code} />
+                                ))}
+                            </div>
+                        </div>
+                    </div>)
+            });
+            console.log('tabContentAllItem', tabContentAllItem);
+        }
+        this.setState({
+            navigationLayout,
+            tabContentFilterItem,
+        })
+    };
+
     render() {
-        const dishesList = [1, 2, 3, 4, 5, 6];
-        const navigationList = [
-            {key:"#tab-1", defaultTab: true},
-            {key:"#tab-2", defaultTab: false},
-            {key:"#tab-3", defaultTab: false},
-            {key:"#tab-4", defaultTab: false},
-            ];
+        const { navigationLayout, tabContentAllItem, tabContentFilterItem, findDishesKey} = this.state;
+        const tabContent = !findDishesKey ? tabContentAllItem : tabContentFilterItem;
+        console.log('tabContent', tabContent);
         return (
             <div className="order-food">
                 <section className="bg-title-page flex-c-m p-t-160 p-b-80 p-l-15 p-r-15"
@@ -39,53 +121,26 @@ class OrderFood extends Component {
                     </h2>
                 </section>
                 <div className="container p-t-20 p-b-20">
-                    <ul className="mp-menu-tab-nav nav nav-tabs" role="tablist">
-                        {navigationList.map((item) => (
-                            <NavigationItem item={item}/>
-                        ))}
-                    </ul>
-                    <div className="tab-content menu-tab-content">
-                        <div className="tab-pane fade" id="tab-1" role="tabpanel" aria-labelledby="tab-1">
-                            <div className="tab-pane-details row">
-                                {dishesList.map((item) => (
-                                    <div className="dishes-item blo3 row m-b-30 col-md-6 col-sm-12"
-                                         onClick={() => console.log('first item')}>
-                                        <div className="pic-blo3 bo-rad-20 hov-img-zoom col-md-3 col-5 p-0">
-                                            <a href="#"><img src={DetailImage} alt="IMG-MENU"/></a>
-                                        </div>
-
-                                        <div className="text-blo3 col-md-9 col-7">
-                                            <a href="#" className="txt21 m-b-3">
-                                                Sed varius
-                                            </a>
-
-                                            <div className="txt23">Aenean pharetra tortor dui in pellentesque</div>
-
-                                            <div className="price-content m-t-20 row">
-                                                <div className="txt22 col-7">$29.79</div>
-                                                <div className="txt22 col-5 action-button">
-                                                    <Button variant="danger">
-                                                        <FaMinusCircle/>
-                                                    </Button>
-                                                    <InputGroup>
-                                                        <FormControl
-                                                            disabled
-                                                            className="custom-input"
-                                                            type={'number'}
-                                                            max={99}
-                                                            placeholder="1"/>
-                                                    </InputGroup>
-                                                    <Button variant="success">
-                                                        <FaPlusCircle/>
-                                                    </Button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
+                    <div className="wrap-inputname size12 bo2 bo-rad-10 m-t-3 m-b-23">
+                        <Form.Control
+                            className="bo-rad-10 sizefull txt10 p-l-20"
+                            type="text"
+                            placeholder="Find By Name"
+                            name="username"
+                            value={this.state.findDishesKey}
+                            onChange={(e) => {
+                                this.setState({
+                                    findDishesKey: e.target.value,
+                                }, () => {
+                                    this.handleRenderLayout(this.state.findDishesKey);
+                                })
+                            }}
+                        />
                     </div>
+                    {!findDishesKey ? <ul className="mp-menu-tab-nav nav nav-tabs" role="tablist">
+                            {navigationLayout}
+                        </ul> : null}
+                    {tabContent}
                 </div>
                 <section
                     className="section-lunch bgwhite">

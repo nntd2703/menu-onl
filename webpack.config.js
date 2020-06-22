@@ -20,18 +20,36 @@ module.exports = () => {
     console.log('isProduction', isProduction);
 
     return {
-        entry: './src/index.js',
+        entry: {
+            app:'./src/index.js',
+            vendor: ["jquery",],
+        },
         output: {
             path: path.resolve(__dirname, 'dist'),
-            filename: 'index_bundle.js',
-            chunkFilename: '[id].js',
+            filename: '[name].bundle.js',
+            chunkFilename: '[name].bundle.js',// format name của bundle
             publicPath: ''
         },
         resolve: {
             extensions: ['.js', '.jsx']
         },
         optimization: {
-            minimize: false
+            minimize: false,
+            splitChunks: {
+                cacheGroups: {
+                    vendor: {
+                        name: 'vendor',
+                        chunks: chunk => chunk.name == 'main',
+                        reuseExistingChunk: true,
+                        priority: 1,
+                        test: module =>
+                            /[\\/]node_modules[\\/]/.test(module.context),
+                        minChunks: 1,
+                        minSize: 0,
+                    },
+                },
+            },
+            runtimeChunk: true,
         },
         module: {
             rules: [{
