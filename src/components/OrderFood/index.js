@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
-import {NavigationItem} from "./NavItem";
-
+import $ from "jquery";
+import {DISHES_DATA} from "../../../dishes-utils";
+import {Button, Form, InputGroup} from "react-bootstrap";
+import {MenuItem} from "./MenuItem";
+import {SummaryOrderPanel} from "./SummaryOrderPanel";
 
 import ImageMenuHeader from "../../images/header-menu-01.jpg";
 import ImageTitle from "../../images/bg-title-page-01.jpg";
-import $ from "jquery";
-import {Item} from "./Item";
-import {DISHES_DATA} from "../../../dishes-utils";
-import {Form} from "react-bootstrap";
 
 class OrderFood extends Component {
     constructor(props) {
@@ -15,7 +14,7 @@ class OrderFood extends Component {
 
         const DISHES_DATA_MENU = DISHES_DATA.Menu;
         this.DISHES_DATA_MENU = DISHES_DATA_MENU;
-        const type = DISHES_DATA.Type;
+        const type = DISHES_DATA.Type.filter((item) => item.Code !== 'SL');
         const data = type.map((item, index) => {
             const dishesList = [];
             DISHES_DATA_MENU.forEach((detail) => {
@@ -37,10 +36,7 @@ class OrderFood extends Component {
 
         this.state = {
             data,
-            findDishesKey: '',
-            navigationLayout: [],
-            tabContentFilterItem: [],
-            tabContentAllItem: [],
+            findDishesKey: undefined,
         };
     }
     componentDidMount() {
@@ -53,8 +49,6 @@ class OrderFood extends Component {
                 });
             });
         });
-
-        this.handleRenderLayout();
     }
 
     navOnClicked = (keyItem) => {
@@ -66,52 +60,9 @@ class OrderFood extends Component {
         }));
     };
 
-    handleRenderLayout = (findDishesKey) => {
-        const { data, tabContentAllItem } = this.state;
-        const navigationLayout = [];
-        const tabContentFilterItem = [];
-        if (findDishesKey) {
-            const result = this.DISHES_DATA_MENU.filter((item) => {
-                const name = item.Name ? item.Name.toLowerCase() : null;
-                return name ? name.includes(findDishesKey.toLowerCase()) : false;
-            });
-            tabContentFilterItem.push(
-                <div className="tab-content menu-tab-content">
-                    <div className="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="true">
-                        <div className="tab-pane-details row">
-                            {result.map((detail) => (
-                                <Item detail={detail} key={detail.Code} />
-                            ))}
-                        </div>
-                    </div>
-                </div>)
-        } else if (tabContentAllItem.length === 0) {
-            data.forEach((item) => {
-                const { key, isSelected } = item;
-                navigationLayout.push(<NavigationItem item={item} key={item.Code} navOnClicked={this.navOnClicked}/>);
-                tabContentAllItem.push(
-                    <div className="tab-content menu-tab-content">
-                        <div className={`tab-pane fade ${isSelected ? "show active" : null}`} id={key} role="tabpanel" aria-labelledby={key}>
-                            <div className="tab-pane-details row">
-                                {item.dishesList.map((detail) => (
-                                    <Item detail={detail} key={detail.Code} />
-                                ))}
-                            </div>
-                        </div>
-                    </div>)
-            });
-            console.log('tabContentAllItem', tabContentAllItem);
-        }
-        this.setState({
-            navigationLayout,
-            tabContentFilterItem,
-        })
-    };
-
     render() {
-        const { navigationLayout, tabContentAllItem, tabContentFilterItem, findDishesKey} = this.state;
-        const tabContent = !findDishesKey ? tabContentAllItem : tabContentFilterItem;
-        console.log('tabContent', tabContent);
+        const { data, findDishesKey } = this.state;
+
         return (
             <div className="order-food">
                 <section className="bg-title-page flex-c-m p-t-160 p-b-80 p-l-15 p-r-15"
@@ -122,25 +73,34 @@ class OrderFood extends Component {
                 </section>
                 <div className="container p-t-20 p-b-20">
                     <div className="wrap-inputname size12 bo2 bo-rad-10 m-t-3 m-b-23">
-                        <Form.Control
-                            className="bo-rad-10 sizefull txt10 p-l-20"
-                            type="text"
-                            placeholder="Find By Name"
-                            name="username"
-                            value={this.state.findDishesKey}
-                            onChange={(e) => {
-                                this.setState({
-                                    findDishesKey: e.target.value,
-                                }, () => {
-                                    this.handleRenderLayout(this.state.findDishesKey);
-                                })
-                            }}
-                        />
+                        <InputGroup>
+                            <Form.Control
+                                className="search-dishes-input bo-rad-10 sizefull txt10 p-l-20"
+                                type="text"
+                                placeholder="Find By Name"
+                                name="username"
+                                value={findDishesKey}
+                                onChange={(e) => {
+                                    this.setState({
+                                        findDishesKey: e.target.value,
+                                    })
+                                }}
+                            />
+                            <InputGroup.Append>
+                                <Button variant="outline-secondary" onClick={() => {
+                                    this.setState({
+                                        findDishesKey: '',
+                                    })
+                                }}>Clear</Button>
+                            </InputGroup.Append>
+                        </InputGroup>
                     </div>
-                    {!findDishesKey ? <ul className="mp-menu-tab-nav nav nav-tabs" role="tablist">
-                            {navigationLayout}
-                        </ul> : null}
-                    {tabContent}
+                    {<MenuItem
+                        DISHES_DATA_MENU={this.DISHES_DATA_MENU}
+                        data={data}
+                        findDishesKey={findDishesKey}
+                        navOnClicked={this.navOnClicked}
+                    />}
                 </div>
                 <section
                     className="section-lunch bgwhite">
@@ -157,9 +117,7 @@ class OrderFood extends Component {
                     </div>
                 </section>
                 <div className="total-order" align="center">
-                    <div className="content container">
-                        <p> hello this is a bottom div</p>
-                    </div>
+                    <SummaryOrderPanel/>
                 </div>
             </div>
         );

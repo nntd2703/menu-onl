@@ -1,197 +1,197 @@
 export const DISHES_DATA = {
     "Menu": [
-        {
-            "Code": "SL-1",
-            "Name": "Sake Sashimi",
-            "Type": "Set lunch",
-            "Piece": "6",
-            "Description": "Sliced raw fresh salmon",
-            "Price": "82,000"
-        },
-        {
-            "Code": "SL-2",
-            "Name": "Maguro Sashimi",
-            "Type": "Set lunch",
-            "Piece": "6",
-            "Description": "Sliced raw fresh tuna",
-            "Price": "72,000"
-        },
-        {
-            "Code": "SL-3",
-            "Name": "Tako",
-            "Type": "Set lunch",
-            "Piece": "6",
-            "Price": "75,000"
-        },
-        {
-            "Code": "SL-4",
-            "Name": "Moria Wase C",
-            "Type": "Set lunch",
-            "Price": "92,000"
-        },
-        {
-            "Code": "SL-5",
-            "Name": "Ton Katsu",
-            "Type": "Set lunch",
-            "Price": "68,000"
-        },
-        {
-            "Code": "SL-6",
-            "Name": "Kaki Furai",
-            "Type": "Set lunch",
-            "Price": "78,000"
-        },
-        {
-            "Code": "SL-7",
-            "Name": "Ebi No Tenpura",
-            "Type": "Set lunch",
-            "Price": "49,000"
-        },
-        {
-            "Code": "SL-8",
-            "Name": "Ebi Furai",
-            "Type": "Set lunch",
-            "Price": "49,000"
-        },
-        {
-            "Code": "SL-9",
-            "Name": "Tori Tatsuta Age",
-            "Type": "Set lunch",
-            "Price": "49,000"
-        },
-        {
-            "Code": "SL-10",
-            "Name": "Tori Spicy Age",
-            "Type": "Set lunch",
-            "Price": "49,000"
-        },
-        {
-            "Code": "SL-11",
-            "Name": "Tori Tebakara Age",
-            "Type": "Set lunch",
-            "Price": "49,000"
-        },
-        {
-            "Code": "SL-12",
-            "Name": "Unagi No kaba Yaki",
-            "Type": "Set lunch",
-            "Price": "195,000"
-        },
-        {
-            "Code": "SL-13",
-            "Name": "Saba No Shio Yaki",
-            "Type": "Set lunch",
-            "Price": "58,000"
-        },
-        {
-            "Code": "SL-14",
-            "Name": "San ma no shio Yaki",
-            "Type": "Set lunch",
-            "Price": "38,000"
-        },
-        {
-            "Code": "SL-15",
-            "Name": "Wahu Saikuro Steak",
-            "Type": "Set lunch",
-            "Price": "72,000"
-        },
-        {
-            "Code": "SL-16",
-            "Name": "Sake no teri yaki",
-            "Type": "Set lunch",
-            "Price": "88,000"
-        },
-        {
-            "Code": "SL-17",
-            "Name": "Sake atama Yaki",
-            "Type": "Set lunch",
-            "Price": "65,000"
-        },
-        {
-            "Code": "SL-18",
-            "Name": "Ika No Maru Teri Yaki",
-            "Type": "Set lunch",
-            "Price": "88,000"
-        },
-        {
-            "Code": "SL-19",
-            "Name": "Buta no shoga yaki",
-            "Type": "Set lunch",
-            "Price": "52,000"
-        },
-        {
-            "Code": "SL-20",
-            "Name": "Tori Momo No Teri Yaki",
-            "Type": "Set lunch",
-            "Price": "68,000"
-        },
-        {
-            "Code": "SL-21",
-            "Name": "Knoko No ninniku itame",
-            "Type": "Set lunch",
-            "Price": "55,000"
-        },
-        {
-            "Code": "SL-22",
-            "Name": "Ika Geso Ninniku Itame",
-            "Type": "Set lunch",
-            "Price": "68,000"
-        },
-        {
-            "Code": "SL-23",
-            "Name": "Enoki No Gyuni Ku Yaki",
-            "Type": "Set lunch",
-            "Price": "52,000"
-        },
-        {
-            "Code": "SL-24",
-            "Name": "Curry ( Pork / Beef )",
-            "Type": "Set lunch",
-            "Price": "65,000",
-            "Note": "78000 ( Beef)"
-        },
-        {
-            "Code": "SL-25",
-            "Name": "Una Don",
-            "Type": "Set lunch",
-            "Price": "195,000"
-        },
-        {
-            "Code": "SL-26",
-            "Name": "Oyako don",
-            "Type": "Set lunch",
-            "Price": "68,000"
-        },
-        {
-            "Code": "SL-27",
-            "Name": "Katsu Don",
-            "Type": "Set lunch",
-            "Price": "68,000"
-        },
-        {
-            "Code": "SL-28",
-            "Name": "Sushi Moria Wase C",
-            "Type": "Set lunch",
-            "Price": "66,000"
-        },
-        {
-            "Code": "SL-29",
-            "Name": "Sushi Moria Wase H",
-            "Type": "Set lunch",
-            "Price": "72,000"
-        },
-        {
-            "Code": "SL-30",
-            "Name": "Sushi Moria Wase I",
-            "Type": "Set lunch",
-            "Price": "82,000"
-        },
-        {
-            "Code": "SL-31",
-            "Name": "Sushi Moria Wase F",
-            "Type": "Set lunch",
-            "Price": "72,000"
-        },
+        // {
+        //     "Code": "SL-1",
+        //     "Name": "Sake Sashimi",
+        //     "Type": "Set lunch",
+        //     "Piece": "6",
+        //     "Description": "Sliced raw fresh salmon",
+        //     "Price": "82,000"
+        // },
+        // {
+        //     "Code": "SL-2",
+        //     "Name": "Maguro Sashimi",
+        //     "Type": "Set lunch",
+        //     "Piece": "6",
+        //     "Description": "Sliced raw fresh tuna",
+        //     "Price": "72,000"
+        // },
+        // {
+        //     "Code": "SL-3",
+        //     "Name": "Tako",
+        //     "Type": "Set lunch",
+        //     "Piece": "6",
+        //     "Price": "75,000"
+        // },
+        // {
+        //     "Code": "SL-4",
+        //     "Name": "Moria Wase C",
+        //     "Type": "Set lunch",
+        //     "Price": "92,000"
+        // },
+        // {
+        //     "Code": "SL-5",
+        //     "Name": "Ton Katsu",
+        //     "Type": "Set lunch",
+        //     "Price": "68,000"
+        // },
+        // {
+        //     "Code": "SL-6",
+        //     "Name": "Kaki Furai",
+        //     "Type": "Set lunch",
+        //     "Price": "78,000"
+        // },
+        // {
+        //     "Code": "SL-7",
+        //     "Name": "Ebi No Tenpura",
+        //     "Type": "Set lunch",
+        //     "Price": "49,000"
+        // },
+        // {
+        //     "Code": "SL-8",
+        //     "Name": "Ebi Furai",
+        //     "Type": "Set lunch",
+        //     "Price": "49,000"
+        // },
+        // {
+        //     "Code": "SL-9",
+        //     "Name": "Tori Tatsuta Age",
+        //     "Type": "Set lunch",
+        //     "Price": "49,000"
+        // },
+        // {
+        //     "Code": "SL-10",
+        //     "Name": "Tori Spicy Age",
+        //     "Type": "Set lunch",
+        //     "Price": "49,000"
+        // },
+        // {
+        //     "Code": "SL-11",
+        //     "Name": "Tori Tebakara Age",
+        //     "Type": "Set lunch",
+        //     "Price": "49,000"
+        // },
+        // {
+        //     "Code": "SL-12",
+        //     "Name": "Unagi No kaba Yaki",
+        //     "Type": "Set lunch",
+        //     "Price": "195,000"
+        // },
+        // {
+        //     "Code": "SL-13",
+        //     "Name": "Saba No Shio Yaki",
+        //     "Type": "Set lunch",
+        //     "Price": "58,000"
+        // },
+        // {
+        //     "Code": "SL-14",
+        //     "Name": "San ma no shio Yaki",
+        //     "Type": "Set lunch",
+        //     "Price": "38,000"
+        // },
+        // {
+        //     "Code": "SL-15",
+        //     "Name": "Wahu Saikuro Steak",
+        //     "Type": "Set lunch",
+        //     "Price": "72,000"
+        // },
+        // {
+        //     "Code": "SL-16",
+        //     "Name": "Sake no teri yaki",
+        //     "Type": "Set lunch",
+        //     "Price": "88,000"
+        // },
+        // {
+        //     "Code": "SL-17",
+        //     "Name": "Sake atama Yaki",
+        //     "Type": "Set lunch",
+        //     "Price": "65,000"
+        // },
+        // {
+        //     "Code": "SL-18",
+        //     "Name": "Ika No Maru Teri Yaki",
+        //     "Type": "Set lunch",
+        //     "Price": "88,000"
+        // },
+        // {
+        //     "Code": "SL-19",
+        //     "Name": "Buta no shoga yaki",
+        //     "Type": "Set lunch",
+        //     "Price": "52,000"
+        // },
+        // {
+        //     "Code": "SL-20",
+        //     "Name": "Tori Momo No Teri Yaki",
+        //     "Type": "Set lunch",
+        //     "Price": "68,000"
+        // },
+        // {
+        //     "Code": "SL-21",
+        //     "Name": "Knoko No ninniku itame",
+        //     "Type": "Set lunch",
+        //     "Price": "55,000"
+        // },
+        // {
+        //     "Code": "SL-22",
+        //     "Name": "Ika Geso Ninniku Itame",
+        //     "Type": "Set lunch",
+        //     "Price": "68,000"
+        // },
+        // {
+        //     "Code": "SL-23",
+        //     "Name": "Enoki No Gyuni Ku Yaki",
+        //     "Type": "Set lunch",
+        //     "Price": "52,000"
+        // },
+        // {
+        //     "Code": "SL-24",
+        //     "Name": "Curry ( Pork / Beef )",
+        //     "Type": "Set lunch",
+        //     "Price": "65,000",
+        //     "Note": "78000 ( Beef)"
+        // },
+        // {
+        //     "Code": "SL-25",
+        //     "Name": "Una Don",
+        //     "Type": "Set lunch",
+        //     "Price": "195,000"
+        // },
+        // {
+        //     "Code": "SL-26",
+        //     "Name": "Oyako don",
+        //     "Type": "Set lunch",
+        //     "Price": "68,000"
+        // },
+        // {
+        //     "Code": "SL-27",
+        //     "Name": "Katsu Don",
+        //     "Type": "Set lunch",
+        //     "Price": "68,000"
+        // },
+        // {
+        //     "Code": "SL-28",
+        //     "Name": "Sushi Moria Wase C",
+        //     "Type": "Set lunch",
+        //     "Price": "66,000"
+        // },
+        // {
+        //     "Code": "SL-29",
+        //     "Name": "Sushi Moria Wase H",
+        //     "Type": "Set lunch",
+        //     "Price": "72,000"
+        // },
+        // {
+        //     "Code": "SL-30",
+        //     "Name": "Sushi Moria Wase I",
+        //     "Type": "Set lunch",
+        //     "Price": "82,000"
+        // },
+        // {
+        //     "Code": "SL-31",
+        //     "Name": "Sushi Moria Wase F",
+        //     "Type": "Set lunch",
+        //     "Price": "72,000"
+        // },
         {
             "Code": "SA-32",
             "Name": "Sake Sashimi",
