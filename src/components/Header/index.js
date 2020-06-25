@@ -56,7 +56,7 @@ class HeaderComponent extends Component {
                             <div className="wrap_header trans-0-3">
                                 <div className="logo">
                                     <a href="index.html">
-                                        <img src={require('../../images/icons/logo.png')} alt="IMG-LOGO"
+                                        <img src={require('../../images/icons/logo2.png')} alt="IMG-LOGO"
                                              data-logofixed={require('../../images/icons/logo2.png')}/>
                                     </a>
                                 </div>

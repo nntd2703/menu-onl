@@ -106,7 +106,7 @@ body, html {
 
 /* ------------------------------------ */
 a {
-    font-family: Montserrat;
+    font-family: Montserrat, serif;
     font-weight: 400;
     font-size: 15px;
     line-height: 1.7;
@@ -129,11 +129,12 @@ a:hover {
 
 /* ------------------------------------ */
 h1,h2,h3,h4,h5,h6 {
-    margin: 0px;
+    margin: 0;
+    font-family: Montserrat, serif;
 }
 
 p {
-    font-family: Montserrat;
+    font-family: Montserrat, serif;
     font-weight: 400;
     font-size: 15px;
     line-height: 1.7;
@@ -148,10 +149,10 @@ ul, li {
 
 
 /* ------------------------------------ */
-input {
-    outline: none;
-    border: none !important;
-}
+/*input {*/
+/*    outline: none;*/
+/*    border: none !important;*/
+/*}*/
 
 textarea {
     outline: none;
@@ -191,6 +192,10 @@ button {
     outline: none !important;
     border: none;
     background: transparent;
+}
+
+.button-color {
+    background-color: #e4002b !important;
 }
 
 button:hover {
@@ -489,7 +494,7 @@ input[type="date" i] {
     top: 0;
     left: 0;
     z-index: 100;
-    border-top: 5px solid #ec1d25;
+    border-top: 5px solid #e4002b;
 }
 
 .wrap_header {
@@ -675,6 +680,7 @@ input[type="date" i] {
     height: 15px;
     border-top: 2px solid white;
     border-bottom: 2px solid white;
+    display: none;
 }
 
 .header-fixed .btn-show-sidebar {
@@ -793,6 +799,10 @@ input[type="date" i] {
     .gallery-sidebar {
         padding-left: 20px;
         padding-right: 20px;
+    }
+
+    .btn-show-sidebar {
+        display: block
     }
 }
 
@@ -1624,4 +1634,16 @@ body {padding-right: 0px !important;}
     left: 20px;
     border-radius: 10px;
     background-color: #ec1d25;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
 }

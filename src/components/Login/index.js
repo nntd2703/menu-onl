@@ -3,7 +3,7 @@ import {Form, FormGroup} from "react-bootstrap";
 import {Formik} from "formik";
 import * as yup from 'yup';
 import firebase from "../../firebase";
-import {ERROR_MESSAGE, FIREBASE_KEY} from "../../utils";
+import {ERROR_MESSAGE, FIREBASE_KEY} from "../../utils/utils";
 import logo from "../../images/logo.png";
 import LoadingSpinnerComponent from "../LoadingSpinnerComponent";
 

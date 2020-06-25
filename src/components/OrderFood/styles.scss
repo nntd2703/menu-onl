@@ -1,5 +1,45 @@
-.order-food {
+.modal-dialog {
+  .modal-content {
+    .modal-title-cus {
+      font-size: 17px;
+    }
 
+    .modal-footer {
+      border-top: none;
+    }
+
+    .branch {
+      border: 1px solid rgba(0, 0, 0, .2);
+    }
+
+    .branch-option {
+      padding: 15px;
+
+      .pick-up-label {
+        font-weight: 800;
+        color: white;
+      }
+    }
+
+    .branch-option:nth-child(2) {
+      border-top: 1px solid #dee2e6;
+    }
+  }
+
+  .input-address-delivery {
+    .form-control {
+      border: 1px solid #ced4da;
+    }
+    .delivery-button {
+      p {
+        font-weight: 800;
+        color: white;
+      }
+    }
+  }
+}
+
+.order-food {
   input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -31,6 +71,7 @@
         border: none;
         background: #f2f8f9;
         padding: 12px 0 10px;
+
         .mp-menu-tab-nav
         i {
           color: #737373;
@@ -63,6 +104,7 @@
           border: none;
           outline: 1px solid #ffc515;
           outline-offset: -1px;
+
           h5 {
             color: #ffc515
           }
@@ -74,15 +116,20 @@
       }
     }
   }
+
   .dishes-item {
     margin-right: 15px;
   }
+
   .tab-pane-details {
     margin: 0 15px !important;
+
     .action-button {
       display: flex;
+
       .input-group {
         width: 50%;
+
         .custom-input {
           text-align: center;
           background: white;
@@ -92,10 +139,8 @@
     }
   }
 
-
-
   /* Medium Mobile :480px. */
-  @media only screen and (max-width: 576px){
+  @media only screen and (max-width: 576px) {
     .mp-menu-tab-nav .nav-item {
       width: 100%;
       margin-bottom: 20px;
@@ -117,12 +162,14 @@
     position: absolute;
     width: 100%;
     height: 77px;
-    bottom:0px;
+    bottom: 0px;
+
     .content {
-      background-color: red;
+      background-color: #e4002b;
       height: 67px;
       margin-bottom: 10px;
       border-radius: 20px;
+
       p {
         color: #ffffff;
       }

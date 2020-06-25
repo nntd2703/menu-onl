@@ -1,3 +1,28 @@
+.modal-dialog .modal-content .modal-title-cus {
+  font-size: 17px; }
+
+.modal-dialog .modal-content .modal-footer {
+  border-top: none; }
+
+.modal-dialog .modal-content .branch {
+  border: 1px solid rgba(0, 0, 0, 0.2); }
+
+.modal-dialog .modal-content .branch-option {
+  padding: 15px; }
+  .modal-dialog .modal-content .branch-option .pick-up-label {
+    font-weight: 800;
+    color: white; }
+
+.modal-dialog .modal-content .branch-option:nth-child(2) {
+  border-top: 1px solid #dee2e6; }
+
+.modal-dialog .input-address-delivery .form-control {
+  border: 1px solid #ced4da; }
+
+.modal-dialog .input-address-delivery .delivery-button p {
+  font-weight: 800;
+  color: white; }
+
 .order-food {
   /* Medium Mobile :480px. */
   /* Tablet :768px. */ }
@@ -81,7 +106,7 @@ i {
     height: 77px;
     bottom: 0px; }
     .order-food .total-order .content {
-      background-color: red;
+      background-color: #e4002b;
       height: 67px;
       margin-bottom: 10px;
       border-radius: 20px; }
