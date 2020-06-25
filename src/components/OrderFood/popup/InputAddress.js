@@ -25,7 +25,6 @@ export default class InputAddress extends React.Component {
 
     getWard = (districtId) => {
         const wardArr = WARD.filter((item) => item.huyen_id === parseInt(districtId));
-        console.log('wardArr', wardArr);
         return wardArr.sort(function (a, b) {
             return ('' + a.name).localeCompare(b.name);
         }).map((item) => (
@@ -42,9 +41,9 @@ export default class InputAddress extends React.Component {
                     validationSchema={schema}
                     initialValues={{
                         addressCity: "Hồ Chí Minh",
-                        addressDistrict: null,
-                        addressWard: null,
-                        addressDetails: null,
+                        addressDistrict: "",
+                        addressWard: "",
+                        addressDetails: "",
                     }}
                     onSubmit={this.onSubmit}
                 >
@@ -56,12 +55,7 @@ export default class InputAddress extends React.Component {
                           touched,
                           isValid,
                           errors,
-                      }) => {
-                        console.log('values', values);
-                        console.log('errors', errors);
-                        console.log('errors11', !values.addressWard  && !values.addressDistrict && !values.addressDetails);
-                        return (
-                            (
+                      }) =>  (
                                 <Form noValidate
                                       onSubmit={handleSubmit}
                                       onKeyDown={(e) => {
@@ -156,9 +150,8 @@ export default class InputAddress extends React.Component {
                                         > <p className="m-0 p-0">Delivery to here </p> </Button>
                                     </div>
                                 </Form>
-                            )
                         )
-                    }}
+                    }
                 </Formik>
             </div>
         )

@@ -39,7 +39,7 @@ class OrderFood extends Component {
             data,
             findDishesKey: undefined,
             isShowOrderPopup: true,
-            keyBranch: null,
+            orderMethod: null,
         };
     }
 
@@ -64,10 +64,11 @@ class OrderFood extends Component {
         }));
     };
 
-    pickUpBranch = (keyBranch) => {
-        console.log('keyBranch', keyBranch);
+    orderMethod = (value) => {
         this.setState({
-            keyBranch,
+            orderMethod: {
+                ...value
+            },
         })
     };
 
@@ -76,7 +77,7 @@ class OrderFood extends Component {
 
         return (
             <>
-                <PreOrder isShowOrderPopup={isShowOrderPopup} pickUpBranch={this.pickUpBranch}/>
+                <PreOrder isShowOrderPopup={isShowOrderPopup} orderMethod={this.orderMethod}/>
                 <div className="order-food">
                     <section className="bg-title-page flex-c-m p-t-160 p-b-80 p-l-15 p-r-15"
                              style={{backgroundImage: "url(" + ImageTitle + ")"}}>

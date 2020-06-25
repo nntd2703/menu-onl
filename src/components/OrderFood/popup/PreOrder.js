@@ -25,8 +25,8 @@ const BRANCH = [{
 }];
 
 const schema = yup.object({
-    name: yup.string().required('Tên đặt nhập không được để trống'),
-    phone: yup.string().required('Mật khẩu không được để trống'),
+    name: yup.string().required('Tên người đặt hàng không được để trống'),
+    phone: yup.string().required('Số điện thoại không được để trống'),
 });
 
 export default class PreOrder extends React.Component {
@@ -36,7 +36,14 @@ export default class PreOrder extends React.Component {
         this.state = {
             modalShow: isShowOrderPopup,
             optionType: '',
-            addressDelivery: null,
+            orderInformation: {
+                name: '',
+                phone: '',
+            },
+            errorMessages: {
+                name: null,
+                phone: null,
+            }
         }
     };
 
@@ -47,28 +54,52 @@ export default class PreOrder extends React.Component {
     };
 
     render() {
-        const {modalShow, optionType} = this.state;
-        const {pickUpBranch} = this.props;
+        const {
+            modalShow,
+            optionType,
+            orderInformation,
+            errorMessages,
+        } = this.state;
+        const {orderMethod} = this.props;
 
         let deliveryInformationLayout = null;
         if (optionType === OPTION_TYPE.PickUp) {
             deliveryInformationLayout = <PickUpLayout chooseBranchClicked={(key) => {
-                this.setState({
-                    modalShow: false,
-                });
-                pickUpBranch(key);
+                console.log('orderInformation', orderInformation);
+                if (orderInformation.name && orderInformation.phone) {
+                    this.setState({
+                        modalShow: false,
+                    }, () => {
+                        orderMethod({
+                            method: "pickup",
+                            pickUpBranch: key,
+                            ...orderInformation,
+                        });
+                    });
+                } else {
+                    this.setState({
+                        errorMessages: {
+                            name: !orderInformation.name ? 'Tên người đặt hàng không được để trống' : null,
+                            phone: !orderInformation.phone ? 'Số điện thoại không được để trống' : null,
+                        }
+                    })
+                }
             }}
             />;
         } else if (optionType === OPTION_TYPE.Delivery) {
             deliveryInformationLayout = <DeliveryLayout submitAddress={(values) => {
-                console.log('submitAddress', values)
                 this.setState({
-                    addressDelivery: {
-                        ...values
-                    }
-                })
-            }
-            }/>;
+                    modalShow: false,
+                }, () => {
+                    orderMethod({
+                        method: "delivery",
+                        ...orderInformation,
+                        addressDetails: {
+                            ...values
+                        },
+                    });
+                });
+            }}/>;
         }
         return (
             <Modal
@@ -105,8 +136,8 @@ export default class PreOrder extends React.Component {
                     <Formik
                         validationSchema={schema}
                         initialValues={{
-                            name: null,
-                            phone: null,
+                            name: "",
+                            phone: "",
                         }}
                         onSubmit={this.onSubmit}
                     >
@@ -115,31 +146,12 @@ export default class PreOrder extends React.Component {
                               handleChange,
                               handleBlur,
                               values,
-                              touched,
-                              isValid,
                               errors,
+                              setFieldValue
                           }) => (
                             <Form noValidate
-                                  onSubmit={handleSubmit}
-                                  onKeyDown={(e) => {
-                                      if (e.key === 'Enter') {
-                                          handleSubmit();
-                                      }
-                                  }}>
+                                  onSubmit={handleSubmit}>
                                 <Row>
-                                    <FormGroup className="col-md-6 col-12">
-                                        <p>Name: </p>
-                                        <Form.Control
-                                            type="text"
-                                            name="name"
-                                            value={values.name}
-                                            onChange={handleChange}
-                                            isInvalid={!!errors.name}
-                                        />
-                                        <Form.Control.Feedback type="invalid">
-                                            {errors.name}
-                                        </Form.Control.Feedback>
-                                    </FormGroup>
                                     <FormGroup className="col-md-6 col-12">
                                         <p>Phone Number: </p>
                                         <Form.Control
@@ -147,9 +159,44 @@ export default class PreOrder extends React.Component {
                                             name="phone"
                                             value={values.phone}
                                             onChange={handleChange}
-                                            isInvalid={!!errors.phone}/>
+                                            onBlur={() =>{
+                                                console.log('valuesphone', values)
+                                                this.setState({
+                                                    orderInformation: {
+                                                        ...values,
+                                                    },
+                                                    errorMessages: {
+                                                        phone: !values.phone ? 'Số điện thoại không được để trống' : null,
+                                                    }
+                                                })
+                                            }}
+                                            isInvalid={!!errors.phone || errorMessages.phone}/>
                                         <Form.Control.Feedback type="invalid">
-                                            {errors.phone}
+                                            {errors.phone || errorMessages.phone}
+                                        </Form.Control.Feedback>
+                                    </FormGroup>
+                                    <FormGroup className="col-md-6 col-12">
+                                        <p>Name: </p>
+                                        <Form.Control
+                                            type="text"
+                                            name="name"
+                                            value={values.name}
+                                            onChange={handleChange}
+                                            onBlur={() => {
+                                                console.log('valuesname', values)
+                                                this.setState({
+                                                    orderInformation: {
+                                                        ...values,
+                                                    },
+                                                    errorMessages: {
+                                                        name: !values.name ? 'Tên người đặt hàng không được để trống' : null,
+                                                    }
+                                                })
+                                            }}
+                                            isInvalid={!!errors.name || errorMessages.name}
+                                        />
+                                        <Form.Control.Feedback type="invalid">
+                                            {errors.name || errorMessages.name}
                                         </Form.Control.Feedback>
                                     </FormGroup>
                                 </Row>
