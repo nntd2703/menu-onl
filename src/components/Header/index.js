@@ -1,8 +1,17 @@
 import React, {Component} from 'react';
 import $ from 'jquery';
+import {FaShoppingCart} from "react-icons/fa";
 
 class HeaderComponent extends Component {
-    componentDidMount(){
+    constructor(props) {
+        super(props);
+        this.state = {
+            totalItem: 3,
+            totalPrice: "234.000",
+        }
+    }
+
+    componentDidMount() {
         /*[ Fixed Header ]
         ===========================================================*/
         var header = $('header');
@@ -11,35 +20,34 @@ class HeaderComponent extends Component {
         var linkLogo2 = $(logo).data('logofixed');
 
 
-        $(window).on('scroll',function(){
-            if($(this).scrollTop() > 5 && $(this).width() > 992) {
-                $(logo).attr('src',linkLogo2);
+        $(window).on('scroll', function () {
+            if ($(this).scrollTop() > 5 && $(this).width() > 992) {
+                $(logo).attr('src', linkLogo2);
                 $(header).addClass('header-fixed');
-            }
-            else {
+            } else {
                 $(header).removeClass('header-fixed');
-                $(logo).attr('src',linkLogo1);
+                $(logo).attr('src', linkLogo1);
             }
 
         });
-        $( document ).ready(function() {
+        $(document).ready(function () {
             $('body').append('<div class="overlay-sidebar trans-0-4"></div>');
             var ovlSideBar = $('.overlay-sidebar');
             var btnShowSidebar = $('.btn-show-sidebar');
             var btnHideSidebar = $('.btn-hide-sidebar');
             var sidebar = $('.sidebar');
 
-            $(btnShowSidebar).on('click', function(){
+            $(btnShowSidebar).on('click', function () {
                 $(sidebar).addClass('show-sidebar');
                 $(ovlSideBar).addClass('show-overlay-sidebar');
             });
 
-            $(btnHideSidebar).on('click', function(){
+            $(btnHideSidebar).on('click', function () {
                 $(sidebar).removeClass('show-sidebar');
                 $(ovlSideBar).removeClass('show-overlay-sidebar');
             });
 
-            $(ovlSideBar).on('click', function(){
+            $(ovlSideBar).on('click', function () {
                 $(sidebar).removeClass('show-sidebar');
                 $(ovlSideBar).removeClass('show-overlay-sidebar');
             })
@@ -48,6 +56,7 @@ class HeaderComponent extends Component {
     }
 
     render() {
+        const { totalItem, totalPrice } = this.state;
         return (
             <>
                 <header>
@@ -60,8 +69,7 @@ class HeaderComponent extends Component {
                                              data-logofixed={require('../../images/icons/logo2.png')}/>
                                     </a>
                                 </div>
-
-                                <div className="wrap_menu p-l-45 p-l-0-xl">
+                                <div className="wrap_menu p-l-0-xl">
                                     <nav className="menu">
                                         <ul className="main_menu">
                                             <li>
@@ -91,15 +99,25 @@ class HeaderComponent extends Component {
                                             <li>
                                                 <a href="contact.html">Contact</a>
                                             </li>
+
                                         </ul>
                                     </nav>
                                 </div>
+                                <div className="wrap_menu_cart">
+                                    <div className="menu">
+                                        <ul className="m-b-0">
+                                            <li className="dis-inline-block w-100 t-center">
+                                                <a>
+                                                    <div className="dis-inline"><FaShoppingCart size={30}/></div>
+                                                    <p className="total-price dis-inline p-l-15 font-weight-bolder">{`${totalItem} : ${totalPrice} vnd`}</p>
+                                                    <p className="intro-payment m-b-0 font-italic">(Click here to complete order)</p>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
 
-                                <div className="social flex-w flex-l-m p-r-20">
-                                    <a href="#"><i className="fa fa-tripadvisor" aria-hidden="true"/></a>
-                                    <a href="#"><i className="fa fa-facebook m-l-21" aria-hidden="true"/></a>
-                                    <a href="#"><i className="fa fa-twitter m-l-21" aria-hidden="true"/></a>
-
+                                <div className="social h-100 flex-w flex-l-m p-r-20">
                                     <button className="btn-show-sidebar m-l-33 trans-0-4"></button>
                                 </div>
                             </div>
@@ -155,42 +173,42 @@ class HeaderComponent extends Component {
 
                             <a className="item-gallery-sidebar wrap-pic-w" href="images/photo-gallery-02.jpg"
                                data-lightbox="gallery-footer">
-                                <img src={require('../../images/photo-gallery-thumb-02.jpg')}alt="GALLERY"/>
+                                <img src={require('../../images/photo-gallery-thumb-02.jpg')} alt="GALLERY"/>
                             </a>
 
                             <a className="item-gallery-sidebar wrap-pic-w" href="images/photo-gallery-03.jpg"
                                data-lightbox="gallery-footer">
-                                <img src={require('../../images/photo-gallery-thumb-03.jpg')}alt="GALLERY"/>
+                                <img src={require('../../images/photo-gallery-thumb-03.jpg')} alt="GALLERY"/>
                             </a>
 
                             <a className="item-gallery-sidebar wrap-pic-w" href="images/photo-gallery-05.jpg"
                                data-lightbox="gallery-footer">
-                                <img src={require('../../images/photo-gallery-thumb-05.jpg')}alt="GALLERY"/>
+                                <img src={require('../../images/photo-gallery-thumb-05.jpg')} alt="GALLERY"/>
                             </a>
 
                             <a className="item-gallery-sidebar wrap-pic-w" href="images/photo-gallery-06.jpg"
                                data-lightbox="gallery-footer">
-                                <img src={require('../../images/photo-gallery-thumb-06.jpg')}alt="GALLERY"/>
+                                <img src={require('../../images/photo-gallery-thumb-06.jpg')} alt="GALLERY"/>
                             </a>
 
                             <a className="item-gallery-sidebar wrap-pic-w" href="images/photo-gallery-07.jpg"
                                data-lightbox="gallery-footer">
-                                <img src={require('../../images/photo-gallery-thumb-07.jpg')}alt="GALLERY"/>
+                                <img src={require('../../images/photo-gallery-thumb-07.jpg')} alt="GALLERY"/>
                             </a>
 
                             <a className="item-gallery-sidebar wrap-pic-w" href="images/photo-gallery-09.jpg"
                                data-lightbox="gallery-footer">
-                                <img src={require('../../images/photo-gallery-thumb-09.jpg')}alt="GALLERY"/>
+                                <img src={require('../../images/photo-gallery-thumb-09.jpg')} alt="GALLERY"/>
                             </a>
 
                             <a className="item-gallery-sidebar wrap-pic-w" href="images/photo-gallery-10.jpg"
                                data-lightbox="gallery-footer">
-                                <img src={require('../../images/photo-gallery-thumb-10.jpg')}alt="GALLERY"/>
+                                <img src={require('../../images/photo-gallery-thumb-10.jpg')} alt="GALLERY"/>
                             </a>
 
                             <a className="item-gallery-sidebar wrap-pic-w" href="images/photo-gallery-11.jpg"
                                data-lightbox="gallery-footer">
-                                <img src={require('../../images/photo-gallery-thumb-11.jpg')}alt="GALLERY"/>
+                                <img src={require('../../images/photo-gallery-thumb-11.jpg')} alt="GALLERY"/>
                             </a>
                         </div>
                     </div>

@@ -81,6 +81,8 @@ i {
           border: none; }
   .order-food .dishes-item {
     margin-right: 15px; }
+    .order-food .dishes-item .dishes-details {
+      padding-right: 0; }
   .order-food .tab-pane-details {
     margin: 0 15px !important; }
     .order-food .tab-pane-details .action-button {
@@ -95,7 +97,10 @@ i {
       width: 100%;
       margin-bottom: 20px; }
     .order-food .tab-pane-details {
-      margin: 0 !important; } }
+      margin: 0 !important; }
+    .order-food .dishes-item {
+      margin-right: 0;
+      padding-right: 0; } }
   @media only screen and (min-width: 768px) and (max-width: 991px) {
     .order-food .mp-menu-tab-nav .nav-item {
       width: 50%;

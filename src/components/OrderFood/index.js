@@ -12,33 +12,29 @@ import PreOrder from "./popup/PreOrder";
 class OrderFood extends Component {
     constructor(props) {
         super(props);
-
-        const DISHES_DATA_MENU = DISHES_DATA.Menu;
-        this.DISHES_DATA_MENU = DISHES_DATA_MENU;
-        const type = DISHES_DATA.Type.filter((item) => item.Code !== 'SL');
-        const data = type.map((item, index) => {
-            const dishesList = [];
-            DISHES_DATA_MENU.forEach((detail) => {
-                const code = detail.Code;
-                if (item.Code === code.substr(0, code.indexOf('-'))) {
-                    dishesList.push({
-                        parentKey: item.Code,
-                        ...detail,
-                    });
-                }
-            });
+        const { data } = this.props;
+        let dishesList = [];
+        const type = [...DISHES_DATA.Type].map((item, index) => {
+            let tempList = [];
+            if (item.Code === 'SA') {
+                tempList = [...data].filter(el => (el.parentKey === item.Code));
+                dishesList = [...tempList];
+            }
             return {
                 key: `tab-${index + 1}`,
                 isSelected: index === 0,
                 ...item,
-                dishesList
+                quantity: tempList.length,
             }
         });
 
+        console.log('dishesList', dishesList);
+
         this.state = {
-            data,
+            type,
+            dishesList,
             findDishesKey: undefined,
-            isShowOrderPopup: true,
+            isShowOrderPopup: false,
             orderMethod: null,
         };
     }
@@ -55,13 +51,27 @@ class OrderFood extends Component {
         });
     }
 
-    navOnClicked = (keyItem) => {
-        this.setState(preState => ({
-            data: preState.data.map((item) => {
-                item.isSelected = item.key === keyItem;
-                return item;
-            })
-        }));
+    navOnClicked = (Code) => {
+        const { data } = this.props;
+        const { type } = this.state;
+        let tempArray = [];
+        const cloneTypeData = type.map((item) => {
+            if (item.Code === Code) {
+                if (item.quantity === 0) {
+                    const temp = data.filter((el) => el.parentKey === item.Code);
+                    item.quantity = temp.length;
+                    tempArray = [...temp];
+                }
+                item.isSelected = true;
+            } else {
+                item.isSelected = false;
+            }
+            return item;
+        });
+        this.setState({
+            type: [...cloneTypeData],
+            dishesList: [...this.state.dishesList, ...tempArray],
+        });
     };
 
     orderMethod = (value) => {
@@ -73,7 +83,7 @@ class OrderFood extends Component {
     };
 
     render() {
-        const {data, findDishesKey, isShowOrderPopup} = this.state;
+        const {type, dishesList, findDishesKey, isShowOrderPopup} = this.state;
 
         return (
             <>
@@ -110,10 +120,11 @@ class OrderFood extends Component {
                             </InputGroup>
                         </div>
                         {<MenuItem
-                            DISHES_DATA_MENU={this.DISHES_DATA_MENU}
-                            data={data}
+                            type={type}
+                            dishesList={dishesList}
                             findDishesKey={findDishesKey}
                             navOnClicked={this.navOnClicked}
+                            {...this.props}
                         />}
                     </div>
                     <section

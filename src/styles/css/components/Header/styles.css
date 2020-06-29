@@ -1,0 +1,14 @@
+.wrap-menu-header .total-price {
+  color: white;
+  font-size: 16px; }
+
+.wrap-menu-header .intro-payment {
+  font-size: 12px;
+  color: white; }
+
+.header-fixed .wrap-menu-header .total-price {
+  color: red;
+  font-size: 16px; }
+
+.header-fixed .intro-payment {
+  color: #666666; }

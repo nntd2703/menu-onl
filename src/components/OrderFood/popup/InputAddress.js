@@ -30,10 +30,11 @@ export default class InputAddress extends React.Component {
         }).map((item) => (
             <option value={item.name}>{item.name}</option>
         ))
-    }
+    };
 
     render() {
         const {error} = this.state;
+        const { orderInformation } = this.props;
         return (
             <div className="input-address-delivery">
                 <p className="modal-title-cus tit10">Delivery To: </p>
@@ -140,7 +141,7 @@ export default class InputAddress extends React.Component {
                                             type="submit"
                                             className="w-50 delivery-button m-t-10"
                                             variant="danger"
-                                            disabled={ !values.addressWard || !values.addressDistrict || !values.addressDetails}
+                                            disabled={ !values.addressWard || !values.addressDistrict || !values.addressDetails || !orderInformation.name || !orderInformation.phone}
                                             onClick={() => {
                                                 this.props.submitAddress({
                                                     ...values,

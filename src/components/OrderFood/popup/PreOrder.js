@@ -12,14 +12,14 @@ const OPTION_TYPE = {
 
 const BRANCH = [{
     key: "bt",
-    name: "BT Branch",
+    name: "Sushi Nhí Bình Thạnh",
     address: " 21 Nguyễn Công Trứ, Phường 19, Bình Thạnh, Hồ Chí Minh",
     hotLine: "0123456789",
     openTime: "11AM - 10:30PM",
 }, {
     key: "d2",
-    name: "D2 Branch",
-    address: "District 2",
+    name: "Sushi Nhí Quận 2",
+    address: " 210 Đường Trần Não, P. Bình An, Quận 2, Hồ Chí Minh",
     hotLine: "0123456789",
     openTime: "11AM - 10:30PM",
 }];
@@ -87,7 +87,9 @@ export default class PreOrder extends React.Component {
             }}
             />;
         } else if (optionType === OPTION_TYPE.Delivery) {
-            deliveryInformationLayout = <DeliveryLayout submitAddress={(values) => {
+            deliveryInformationLayout = <DeliveryLayout
+                orderInformation={orderInformation}
+                submitAddress={(values) => {
                 this.setState({
                     modalShow: false,
                 }, () => {
@@ -221,7 +223,7 @@ export default class PreOrder extends React.Component {
 
 const DeliveryLayout = (props) => {
     return (
-        <InputAddress submitAddress={props.submitAddress}/>
+        <InputAddress orderInformation={props.orderInformation} submitAddress={props.submitAddress}/>
     )
 };
 
@@ -243,16 +245,16 @@ const BranchLayout = (props) => {
         <>
             <div className="branch-option">
                 <div className="row">
-                    <div className="col-2 flex-c flex-m">
-                        <img src={require('../../../images/icons/logo2.png')}/>
+                    <div className="col-md-2 col-4 flex-c flex-m">
+                        <img className="max-w-full max-h-full"  src={require('../../../images/icons/logo.png')}/>
                     </div>
-                    <div className="col-10">
+                    <div className="col-m-10 col-8">
                         <p className="m-b-0 txt24">{name}</p>
                     </div>
                 </div>
                 <div className="row m-t-10">
-                    <p className="m-b-0 txt25 col-8">{address}</p>
-                    <div className="col-4 text-right">
+                    <p className="m-b-0 txt25 col-md-8 col-12">{address}</p>
+                    <div className="col-md-4 text-right col-12">
                         <a href={`tel:+${openTime}`} className="m-b-0 txt25 t-right">{`Hotline: ${hotLine}`}</a>
                         <p className="m-b-0 txt25 t-right">{`Open Time: ${openTime}`}</p>
                     </div>

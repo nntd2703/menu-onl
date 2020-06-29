@@ -5,7 +5,9 @@ class FoodOrder extends Component {
     render() {
         //console.log('id', this.props.match.params.id)
         return (
-            <OrderFood/>
+            <OrderFood
+                {...this.props}
+            />
         );
     }
 }
