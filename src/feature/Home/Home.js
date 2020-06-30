@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import UserManagement from "../components/UserManagement";
+import HomeLayout from "./components/HomeLayout";
 
 class Home extends Component {
     render() {
         return (
-            <UserManagement />
+            <HomeLayout />
         );
     }
 }

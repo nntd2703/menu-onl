@@ -1,42 +1,38 @@
 import React, {Component} from 'react';
 import $ from "jquery";
-import {DISHES_DATA} from "../../utils/dishes-utils";
 import {Button, Form, InputGroup} from "react-bootstrap";
-import {MenuItem} from "./MenuItem";
-import {SummaryOrderPanel} from "./SummaryOrderPanel";
+import MenuItem from "./MenuItem";
 
-import ImageMenuHeader from "../../images/header-menu-01.jpg";
-import ImageTitle from "../../images/bg-title-page-01.jpg";
+import ImageMenuHeader from "../../../../images/header-menu-01.jpg";
+import ImageTitle from "../../../../images/bg-title-page-01.jpg";
 import PreOrder from "./popup/PreOrder";
 
-class OrderFood extends Component {
+class OrderFoodComponent extends Component {
     constructor(props) {
         super(props);
-        const { data } = this.props;
-        let dishesList = [];
-        const type = [...DISHES_DATA.Type].map((item, index) => {
-            let tempList = [];
-            if (item.Code === 'SA') {
-                tempList = [...data].filter(el => (el.parentKey === item.Code));
-                dishesList = [...tempList];
-            }
-            return {
-                key: `tab-${index + 1}`,
-                isSelected: index === 0,
-                ...item,
-                quantity: tempList.length,
-            }
-        });
+        // const { data } = this.props;
+        // let dishesList = [];
+        // const type = [...DISHES_DATA.Type].map((item, index) => {
+        //     let tempList = [];
+        //     if (item.Code === 'SA') {
+        //         tempList = [...data].filter(el => (el.parentKey === item.Code));
+        //         dishesList = [...tempList];
+        //     }
+        //     return {
+        //         key: `tab-${index + 1}`,
+        //         isSelected: index === 0,
+        //         ...item,
+        //         quantity: tempList.length,
+        //     }
+        // });
 
-        console.log('dishesList', dishesList);
-
-        this.state = {
-            type,
-            dishesList,
-            findDishesKey: undefined,
-            isShowOrderPopup: false,
-            orderMethod: null,
-        };
+        // this.state = {
+        //     type,
+        //     dishesList,
+        //     findDishesKey: undefined,
+        //     isShowOrderPopup: false,
+        //     orderMethod: null,
+        // };
     }
 
     componentDidMount() {
@@ -52,42 +48,42 @@ class OrderFood extends Component {
     }
 
     navOnClicked = (Code) => {
-        const { data } = this.props;
-        const { type } = this.state;
-        let tempArray = [];
-        const cloneTypeData = type.map((item) => {
-            if (item.Code === Code) {
-                if (item.quantity === 0) {
-                    const temp = data.filter((el) => el.parentKey === item.Code);
-                    item.quantity = temp.length;
-                    tempArray = [...temp];
-                }
-                item.isSelected = true;
-            } else {
-                item.isSelected = false;
-            }
-            return item;
-        });
-        this.setState({
-            type: [...cloneTypeData],
-            dishesList: [...this.state.dishesList, ...tempArray],
-        });
+        // const { data } = this.props;
+        // const { type } = this.state;
+        // let tempArray = [];
+        // const cloneTypeData = type.map((item) => {
+        //     if (item.Code === Code) {
+        //         if (item.quantity === 0) {
+        //             const temp = data.filter((el) => el.parentKey === item.Code);
+        //             item.quantity = temp.length;
+        //             tempArray = [...temp];
+        //         }
+        //         item.isSelected = true;
+        //     } else {
+        //         item.isSelected = false;
+        //     }
+        //     return item;
+        // });
+        // this.setState({
+        //     type: [...cloneTypeData],
+        //     dishesList: [...this.state.dishesList, ...tempArray],
+        // });
     };
 
     orderMethod = (value) => {
-        this.setState({
-            orderMethod: {
-                ...value
-            },
-        })
+        // this.setState({
+        //     orderMethod: {
+        //         ...value
+        //     },
+        // })
     };
 
     render() {
-        const {type, dishesList, findDishesKey, isShowOrderPopup} = this.state;
+        //const {type, dishesList, findDishesKey, isShowOrderPopup} = this.state;
 
         return (
             <>
-                <PreOrder isShowOrderPopup={isShowOrderPopup} orderMethod={this.orderMethod}/>
+                <PreOrder isShowOrderPopup={false} orderMethod={this.orderMethod}/>
                 <div className="order-food">
                     <section className="bg-title-page flex-c-m p-t-160 p-b-80 p-l-15 p-r-15"
                              style={{backgroundImage: "url(" + ImageTitle + ")"}}>
@@ -103,29 +99,23 @@ class OrderFood extends Component {
                                     type="text"
                                     placeholder="Find By Name"
                                     name="username"
-                                    value={findDishesKey}
+                                    value={""}
                                     onChange={(e) => {
-                                        this.setState({
-                                            findDishesKey: e.target.value,
-                                        })
+                                        // this.setState({
+                                        //     findDishesKey: e.target.value,
+                                        // })
                                     }}
                                 />
                                 <InputGroup.Append>
                                     <Button variant="outline-secondary" onClick={() => {
-                                        this.setState({
-                                            findDishesKey: '',
-                                        })
+                                        // this.setState({
+                                        //     findDishesKey: '',
+                                        // })
                                     }}>Clear</Button>
                                 </InputGroup.Append>
                             </InputGroup>
                         </div>
-                        {<MenuItem
-                            type={type}
-                            dishesList={dishesList}
-                            findDishesKey={findDishesKey}
-                            navOnClicked={this.navOnClicked}
-                            {...this.props}
-                        />}
+                        <MenuItem/>
                     </div>
                     <section
                         className="section-lunch bgwhite">
@@ -150,4 +140,4 @@ class OrderFood extends Component {
     }
 }
 
-export default OrderFood;
+export default OrderFoodComponent;

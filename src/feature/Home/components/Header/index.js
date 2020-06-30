@@ -65,8 +65,8 @@ class HeaderComponent extends Component {
                             <div className="wrap_header trans-0-3">
                                 <div className="logo">
                                     <a href="index.html">
-                                        <img src={require('../../images/icons/logo2.png')} alt="IMG-LOGO"
-                                             data-logofixed={require('../../images/icons/logo2.png')}/>
+                                        <img src={require('../../../../images/icons/logo2.png')} alt="IMG-LOGO"
+                                             data-logofixed={require('../../../../images/icons/logo2.png')}/>
                                     </a>
                                 </div>
                                 <div className="wrap_menu p-l-0-xl">
@@ -168,47 +168,47 @@ class HeaderComponent extends Component {
                         <div className="wrap-gallery-sidebar flex-w">
                             <a className="item-gallery-sidebar wrap-pic-w" href="images/photo-gallery-01.jpg"
                                data-lightbox="gallery-footer">
-                                <img src={require('../../images/photo-gallery-thumb-01.jpg')} alt="GALLERY"/>
+                                <img src={require('../../../../images/photo-gallery-thumb-01.jpg')} alt="GALLERY"/>
                             </a>
 
                             <a className="item-gallery-sidebar wrap-pic-w" href="images/photo-gallery-02.jpg"
                                data-lightbox="gallery-footer">
-                                <img src={require('../../images/photo-gallery-thumb-02.jpg')} alt="GALLERY"/>
+                                <img src={require('../../../../images/photo-gallery-thumb-02.jpg')} alt="GALLERY"/>
                             </a>
 
                             <a className="item-gallery-sidebar wrap-pic-w" href="images/photo-gallery-03.jpg"
                                data-lightbox="gallery-footer">
-                                <img src={require('../../images/photo-gallery-thumb-03.jpg')} alt="GALLERY"/>
+                                <img src={require('../../../../images/photo-gallery-thumb-03.jpg')} alt="GALLERY"/>
                             </a>
 
                             <a className="item-gallery-sidebar wrap-pic-w" href="images/photo-gallery-05.jpg"
                                data-lightbox="gallery-footer">
-                                <img src={require('../../images/photo-gallery-thumb-05.jpg')} alt="GALLERY"/>
+                                <img src={require('../../../../images/photo-gallery-thumb-05.jpg')} alt="GALLERY"/>
                             </a>
 
                             <a className="item-gallery-sidebar wrap-pic-w" href="images/photo-gallery-06.jpg"
                                data-lightbox="gallery-footer">
-                                <img src={require('../../images/photo-gallery-thumb-06.jpg')} alt="GALLERY"/>
+                                <img src={require('../../../../images/photo-gallery-thumb-06.jpg')} alt="GALLERY"/>
                             </a>
 
                             <a className="item-gallery-sidebar wrap-pic-w" href="images/photo-gallery-07.jpg"
                                data-lightbox="gallery-footer">
-                                <img src={require('../../images/photo-gallery-thumb-07.jpg')} alt="GALLERY"/>
+                                <img src={require('../../../../images/photo-gallery-thumb-07.jpg')} alt="GALLERY"/>
                             </a>
 
                             <a className="item-gallery-sidebar wrap-pic-w" href="images/photo-gallery-09.jpg"
                                data-lightbox="gallery-footer">
-                                <img src={require('../../images/photo-gallery-thumb-09.jpg')} alt="GALLERY"/>
+                                <img src={require('../../../../images/photo-gallery-thumb-09.jpg')} alt="GALLERY"/>
                             </a>
 
                             <a className="item-gallery-sidebar wrap-pic-w" href="images/photo-gallery-10.jpg"
                                data-lightbox="gallery-footer">
-                                <img src={require('../../images/photo-gallery-thumb-10.jpg')} alt="GALLERY"/>
+                                <img src={require('../../../../images/photo-gallery-thumb-10.jpg')} alt="GALLERY"/>
                             </a>
 
                             <a className="item-gallery-sidebar wrap-pic-w" href="images/photo-gallery-11.jpg"
                                data-lightbox="gallery-footer">
-                                <img src={require('../../images/photo-gallery-thumb-11.jpg')} alt="GALLERY"/>
+                                <img src={require('../../../../images/photo-gallery-thumb-11.jpg')} alt="GALLERY"/>
                             </a>
                         </div>
                     </div>

@@ -8,12 +8,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import "core-js/stable";
 import "regenerator-runtime/runtime";
-import { createStore } from 'redux';
-import {Provider} from "react-redux";
-
-const store = createStore();
+import { Provider } from 'react-redux';
+import { createStore } from 'redux'
+import rootReducer from './reducers'
 
 dotenv.config();
+
+const store = createStore(rootReducer);
 
 ReactDOM.render(
   <Provider store={store}>

@@ -1,9 +1,9 @@
 import React from 'react';
 import {Button, Form, FormGroup, Row, Col} from "react-bootstrap";
-import {ERROR_MESSAGE} from "../../../utils/utils";
-import {Formik} from "formik";
-import {WARD} from "../../../utils/wards";
-import {DISTRICT} from "../../../utils/districts";
+import {ERROR_MESSAGE} from "../../../../../utils/utils";
+import {Formik} from "formik/dist/index";
+import {WARD} from "../../../../../utils/wards";
+import {DISTRICT} from "../../../../../utils/districts";
 import * as yup from "yup";
 
 const schema = yup.object({

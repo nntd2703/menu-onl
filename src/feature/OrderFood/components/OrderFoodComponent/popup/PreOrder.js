@@ -1,8 +1,8 @@
 import React from 'react';
 import {Button, Col, Form, FormControl, FormGroup, Modal, Row} from "react-bootstrap";
 import InputAddress from "./InputAddress";
-import {ERROR_MESSAGE} from "../../../utils/utils";
-import {Formik} from "formik";
+import {ERROR_MESSAGE} from "../../../../../utils/utils";
+import {Formik} from "formik/dist/index";
 import * as yup from "yup";
 
 const OPTION_TYPE = {
@@ -246,7 +246,7 @@ const BranchLayout = (props) => {
             <div className="branch-option">
                 <div className="row">
                     <div className="col-md-2 col-4 flex-c flex-m">
-                        <img className="max-w-full max-h-full"  src={require('../../../images/icons/logo.png')}/>
+                        <img className="max-w-full max-h-full"  src={require('../../../../../images/icons/logo.png')}/>
                     </div>
                     <div className="col-m-10 col-8">
                         <p className="m-b-0 txt24">{name}</p>
