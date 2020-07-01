@@ -15,16 +15,32 @@ const initialStateDishes = {
     })),
 };
 
+const editQuantityItem = (itemKey, dishesList, action) => {
+    const data = [...dishesList];
+    const item = data.find(item => item.Code === itemKey);
+    item.quantity = action === ACTION.increaseQuantity ? item.quantity + 1 : item.quantity - 1;
+    return data;
+};
 
 const foods = (state = initialStateDishes, action) => {
     switch (action.type) {
-        case ACTION.loadingDishes:
+        case ACTION.dishesTypeClicked:
             return {
-                ...state,
+                type: [...state.type].reduce((c, n) => [...c, {...n, isSelected: n.Code === action.itemKey}], []),
                 dishesList: [
                     ...state.dishesList,
                     ...loadingItem(action.itemKey),
                 ]
+            };
+        case ACTION.increaseQuantity:
+            return {
+                ...state,
+                dishesList: editQuantityItem(action.itemKey, state.dishesList, ACTION.increaseQuantity),
+            };
+        case ACTION.decreaseQuantity:
+            return {
+                ...state,
+                dishesList: editQuantityItem(action.itemKey, state.dishesList, ACTION.decreaseQuantity),
             };
         default: return state;
     }

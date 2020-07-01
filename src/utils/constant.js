@@ -1,3 +1,6 @@
 export const ACTION = {
-    loadingDishes: 'LOADING_DISHES'
-}
+    dishesTypeClicked: 'DISHES_TYPE_CLICKED',
+    editQuantityItem: 'EDIT_QUANTITY',
+    increaseQuantity: 'INCREASE_QUANTITY',
+    decreaseQuantity: 'DECREASE_QUANTITY',
+};

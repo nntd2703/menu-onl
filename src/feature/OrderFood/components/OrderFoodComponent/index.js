@@ -47,29 +47,6 @@ class OrderFoodComponent extends Component {
         });
     }
 
-    navOnClicked = (Code) => {
-        // const { data } = this.props;
-        // const { type } = this.state;
-        // let tempArray = [];
-        // const cloneTypeData = type.map((item) => {
-        //     if (item.Code === Code) {
-        //         if (item.quantity === 0) {
-        //             const temp = data.filter((el) => el.parentKey === item.Code);
-        //             item.quantity = temp.length;
-        //             tempArray = [...temp];
-        //         }
-        //         item.isSelected = true;
-        //     } else {
-        //         item.isSelected = false;
-        //     }
-        //     return item;
-        // });
-        // this.setState({
-        //     type: [...cloneTypeData],
-        //     dishesList: [...this.state.dishesList, ...tempArray],
-        // });
-    };
-
     orderMethod = (value) => {
         // this.setState({
         //     orderMethod: {
