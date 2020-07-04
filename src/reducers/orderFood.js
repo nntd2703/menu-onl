@@ -13,6 +13,7 @@ const initialStateDishes = {
         ...item,
         isSelected: index === 0,
     })),
+    updatedItem: null,
 };
 
 const editQuantityItem = (itemKey, dishesList, action) => {
@@ -36,11 +37,19 @@ const foods = (state = initialStateDishes, action) => {
             return {
                 ...state,
                 dishesList: editQuantityItem(action.itemKey, state.dishesList, ACTION.increaseQuantity),
+                updatedItem: [...state.dishesList].find(item => item.Code === action.itemKey),
             };
         case ACTION.decreaseQuantity:
             return {
                 ...state,
                 dishesList: editQuantityItem(action.itemKey, state.dishesList, ACTION.decreaseQuantity),
+                updatedItem: [...state.dishesList].find(item => item.Code === action.itemKey),
+            };
+        case ACTION.cleanToastItem:
+            console.log(state)
+            return {
+                ...state,
+                updatedItem: null,
             };
         default: return state;
     }

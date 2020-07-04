@@ -10,29 +10,9 @@ import PreOrder from "./popup/PreOrder";
 class OrderFoodComponent extends Component {
     constructor(props) {
         super(props);
-        // const { data } = this.props;
-        // let dishesList = [];
-        // const type = [...DISHES_DATA.Type].map((item, index) => {
-        //     let tempList = [];
-        //     if (item.Code === 'SA') {
-        //         tempList = [...data].filter(el => (el.parentKey === item.Code));
-        //         dishesList = [...tempList];
-        //     }
-        //     return {
-        //         key: `tab-${index + 1}`,
-        //         isSelected: index === 0,
-        //         ...item,
-        //         quantity: tempList.length,
-        //     }
-        // });
-
-        // this.state = {
-        //     type,
-        //     dishesList,
-        //     findDishesKey: undefined,
-        //     isShowOrderPopup: false,
-        //     orderMethod: null,
-        // };
+        this.state = {
+            findDishesKey: undefined,
+        };
     }
 
     componentDidMount() {
@@ -47,20 +27,10 @@ class OrderFoodComponent extends Component {
         });
     }
 
-    orderMethod = (value) => {
-        // this.setState({
-        //     orderMethod: {
-        //         ...value
-        //     },
-        // })
-    };
-
     render() {
-        //const {type, dishesList, findDishesKey, isShowOrderPopup} = this.state;
-
         return (
             <>
-                <PreOrder isShowOrderPopup={false} orderMethod={this.orderMethod}/>
+                <PreOrder/>
                 <div className="order-food">
                     <section className="bg-title-page flex-c-m p-t-160 p-b-80 p-l-15 p-r-15"
                              style={{backgroundImage: "url(" + ImageTitle + ")"}}>
@@ -75,24 +45,23 @@ class OrderFoodComponent extends Component {
                                     className="search-dishes-input bo-rad-10 sizefull txt10 p-l-20"
                                     type="text"
                                     placeholder="Find By Name"
-                                    name="username"
-                                    value={""}
+                                    value={this.state.findDishesKey}
                                     onChange={(e) => {
-                                        // this.setState({
-                                        //     findDishesKey: e.target.value,
-                                        // })
+                                        this.setState({
+                                            findDishesKey: e.target.value,
+                                        })
                                     }}
                                 />
                                 <InputGroup.Append>
                                     <Button variant="outline-secondary" onClick={() => {
-                                        // this.setState({
-                                        //     findDishesKey: '',
-                                        // })
+                                        this.setState({
+                                            findDishesKey: '',
+                                        })
                                     }}>Clear</Button>
                                 </InputGroup.Append>
                             </InputGroup>
                         </div>
-                        <MenuItem/>
+                        <MenuItem findDishesKey={this.state.findDishesKey}/>
                     </div>
                     <section
                         className="section-lunch bgwhite">

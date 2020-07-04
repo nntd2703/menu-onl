@@ -1,116 +1,63 @@
 import React from 'react';
-import {Button, Col, Form, FormControl, FormGroup, Modal, Row} from "react-bootstrap";
+import {Form, FormGroup, Modal, Row} from "react-bootstrap";
 import InputAddress from "./InputAddress";
-import {ERROR_MESSAGE} from "../../../../../utils/utils";
 import {Formik} from "formik/dist/index";
 import * as yup from "yup";
+import {
+    updatePhoneNumber,
+    updateDeliveryInformation,
+    updateDeliveryType,
+    updateReceiverName
+} from "../../../OrderFoodAction";
+import {connect} from "react-redux"
+import {OPTION_TYPE, BRANCH} from "../../../../../utils/constant";
+import BranchLayout from "./BranchLayout";
 
-const OPTION_TYPE = {
-    PickUp: 'pickup',
-    Delivery: 'delivery',
-};
-
-const BRANCH = [{
-    key: "bt",
-    name: "Sushi Nhí Bình Thạnh",
-    address: " 21 Nguyễn Công Trứ, Phường 19, Bình Thạnh, Hồ Chí Minh",
-    hotLine: "0123456789",
-    openTime: "11AM - 10:30PM",
-}, {
-    key: "d2",
-    name: "Sushi Nhí Quận 2",
-    address: " 210 Đường Trần Não, P. Bình An, Quận 2, Hồ Chí Minh",
-    hotLine: "0123456789",
-    openTime: "11AM - 10:30PM",
-}];
 
 const schema = yup.object({
     name: yup.string().required('Tên người đặt hàng không được để trống'),
     phone: yup.string().required('Số điện thoại không được để trống'),
 });
 
-export default class PreOrder extends React.Component {
+class PreOrder extends React.Component {
     constructor(props) {
         super(props);
-        const {isShowOrderPopup} = this.props;
-        this.state = {
-            modalShow: isShowOrderPopup,
-            optionType: '',
-            orderInformation: {
-                name: '',
-                phone: '',
-            },
-            errorMessages: {
-                name: null,
-                phone: null,
-            }
-        }
-    };
-
-    handleChange = (e) => {
-        this.setState({
-            optionType: e.target.value,
-        })
     };
 
     render() {
         const {
-            modalShow,
-            optionType,
-            orderInformation,
-            errorMessages,
-        } = this.state;
-        const {orderMethod} = this.props;
+            orderType,
+            name,
+            phoneNumber,
+            updateDeliveryInformation,
+            updateDeliveryType,
+            pickUpBranch,
+            deliveryInformation,
+            updatePhoneNumber,
+            updateReceiverName
+        } = this.props;
+
+        //const isShowModel = !((orderType && name && phoneNumber) && (pickUpBranch || deliveryInformation));
+        const isShowModel = false;
+        const disableButton = !(orderType && name && phoneNumber);
 
         let deliveryInformationLayout = null;
-        if (optionType === OPTION_TYPE.PickUp) {
-            deliveryInformationLayout = <PickUpLayout chooseBranchClicked={(key) => {
-                console.log('orderInformation', orderInformation);
-                if (orderInformation.name && orderInformation.phone) {
-                    this.setState({
-                        modalShow: false,
-                    }, () => {
-                        orderMethod({
-                            method: "pickup",
-                            pickUpBranch: key,
-                            ...orderInformation,
-                        });
-                    });
-                } else {
-                    this.setState({
-                        errorMessages: {
-                            name: !orderInformation.name ? 'Tên người đặt hàng không được để trống' : null,
-                            phone: !orderInformation.phone ? 'Số điện thoại không được để trống' : null,
-                        }
-                    })
-                }
-            }}
+        if (orderType === OPTION_TYPE.PickUp) {
+            deliveryInformationLayout = <PickUpLayout
+                disableButton={disableButton}
+                chooseBranchClicked={updateDeliveryInformation}
             />;
-        } else if (optionType === OPTION_TYPE.Delivery) {
+        } else if (orderType === OPTION_TYPE.Delivery) {
             deliveryInformationLayout = <DeliveryLayout
-                orderInformation={orderInformation}
+                disableButton={disableButton}
                 submitAddress={(values) => {
-                this.setState({
-                    modalShow: false,
-                }, () => {
-                    orderMethod({
-                        method: "delivery",
-                        ...orderInformation,
-                        addressDetails: {
-                            ...values
-                        },
-                    });
-                });
-            }}/>;
+                    updateDeliveryInformation(null, values)
+                }}
+            />;
         }
         return (
             <Modal
-                show={modalShow}
-                onHide={() => {
-                    this.setState({
-                        modalShow: false,
-                    })
-                }}
+                show={isShowModel}
                 size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
@@ -128,8 +75,8 @@ export default class PreOrder extends React.Component {
                     <p className="modal-title-cus tit10">Order Type</p>
                     <Form.Group controlId="order-type">
                         <Form.Control as="select"
-                                      defaultValue={optionType}
-                                      onChange={(e) => this.handleChange(e)}>
+                                      defaultValue={orderType}
+                                      onChange={(e) => updateDeliveryType(e.target.value)}>
                             <option className="d-none" value=''/>
                             <option value={OPTION_TYPE.Delivery}>Delivery</option>
                             <option value={OPTION_TYPE.PickUp}>Pick-up</option>
@@ -161,20 +108,14 @@ export default class PreOrder extends React.Component {
                                             name="phone"
                                             value={values.phone}
                                             onChange={handleChange}
-                                            onBlur={() =>{
-                                                console.log('valuesphone', values)
-                                                this.setState({
-                                                    orderInformation: {
-                                                        ...values,
-                                                    },
-                                                    errorMessages: {
-                                                        phone: !values.phone ? 'Số điện thoại không được để trống' : null,
-                                                    }
-                                                })
+                                            onBlur={() => {
+                                                //will call API search Name depend on receiver phone number here
+                                                updatePhoneNumber(values.phone);
                                             }}
-                                            isInvalid={!!errors.phone || errorMessages.phone}/>
+                                            isInvalid={!!errors.phone}
+                                        />
                                         <Form.Control.Feedback type="invalid">
-                                            {errors.phone || errorMessages.phone}
+                                            {errors.phone}
                                         </Form.Control.Feedback>
                                     </FormGroup>
                                     <FormGroup className="col-md-6 col-12">
@@ -185,20 +126,12 @@ export default class PreOrder extends React.Component {
                                             value={values.name}
                                             onChange={handleChange}
                                             onBlur={() => {
-                                                console.log('valuesname', values)
-                                                this.setState({
-                                                    orderInformation: {
-                                                        ...values,
-                                                    },
-                                                    errorMessages: {
-                                                        name: !values.name ? 'Tên người đặt hàng không được để trống' : null,
-                                                    }
-                                                })
+                                                updateReceiverName(values.name);
                                             }}
-                                            isInvalid={!!errors.name || errorMessages.name}
+                                            isInvalid={!!errors.name}
                                         />
                                         <Form.Control.Feedback type="invalid">
-                                            {errors.name || errorMessages.name}
+                                            {errors.name}
                                         </Form.Control.Feedback>
                                     </FormGroup>
                                 </Row>
@@ -223,7 +156,9 @@ export default class PreOrder extends React.Component {
 
 const DeliveryLayout = (props) => {
     return (
-        <InputAddress orderInformation={props.orderInformation} submitAddress={props.submitAddress}/>
+        <InputAddress
+            disableButton={props.disableButton}
+            submitAddress={props.submitAddress}/>
     )
 };
 
@@ -232,41 +167,39 @@ const PickUpLayout = (props) => {
         <>
             <p className="modal-title-cus tit10">Pick-up Restaurant</p>
             <div className="branch">
-                {BRANCH.map((item) => <BranchLayout key={item.key} item={item}
-                                                    chooseBranchClicked={props.chooseBranchClicked}/>)}
+                {BRANCH.map((item) =>
+                    <BranchLayout
+                    key={item.key} item={item}
+                    chooseBranchClicked={props.chooseBranchClicked}
+                    disableButton={props.disableButton}
+                    />)}
             </div>
         </>
     )
 };
 
-const BranchLayout = (props) => {
-    const {key, name, address, hotLine, openTime} = props.item;
-    return (
-        <>
-            <div className="branch-option">
-                <div className="row">
-                    <div className="col-md-2 col-4 flex-c flex-m">
-                        <img className="max-w-full max-h-full"  src={require('../../../../../images/icons/logo.png')}/>
-                    </div>
-                    <div className="col-m-10 col-8">
-                        <p className="m-b-0 txt24">{name}</p>
-                    </div>
-                </div>
-                <div className="row m-t-10">
-                    <p className="m-b-0 txt25 col-md-8 col-12">{address}</p>
-                    <div className="col-md-4 text-right col-12">
-                        <a href={`tel:+${openTime}`} className="m-b-0 txt25 t-right">{`Hotline: ${hotLine}`}</a>
-                        <p className="m-b-0 txt25 t-right">{`Open Time: ${openTime}`}</p>
-                    </div>
-                </div>
-                <div className="text-center">
-                    <Button
-                        className="w-50 pick-up-button m-t-10"
-                        variant="danger"
-                        onClick={() => props.chooseBranchClicked(key)}
-                    ><p className="pick-up-label m-0 p-0">Pick up from this branch</p></Button>
-                </div>
-            </div>
-        </>
-    )
-}
+
+const mapStateToProps = (state) => {
+    return {
+        ...state.deliveryInformation,
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        updatePhoneNumber: (value) => {
+            dispatch(updatePhoneNumber(value));
+        },
+        updateReceiverName: (value) => {
+            dispatch(updateReceiverName(value));
+        },
+        updateDeliveryInformation: (pickUpBranch, deliveryInformation) => {
+            dispatch(updateDeliveryInformation(pickUpBranch, deliveryInformation));
+        },
+        updateDeliveryType: (orderType) => {
+            dispatch(updateDeliveryType(orderType));
+        }
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PreOrder);

@@ -1,6 +1,5 @@
 import React from 'react';
-import {Button, Form, FormGroup, Row, Col} from "react-bootstrap";
-import {ERROR_MESSAGE} from "../../../../../utils/utils";
+import {Button, Form, Row, Col} from "react-bootstrap";
 import {Formik} from "formik/dist/index";
 import {WARD} from "../../../../../utils/wards";
 import {DISTRICT} from "../../../../../utils/districts";
@@ -34,7 +33,7 @@ export default class InputAddress extends React.Component {
 
     render() {
         const {error} = this.state;
-        const { orderInformation } = this.props;
+        const { disableButton } = this.props;
         return (
             <div className="input-address-delivery">
                 <p className="modal-title-cus tit10">Delivery To: </p>
@@ -141,7 +140,7 @@ export default class InputAddress extends React.Component {
                                             type="submit"
                                             className="w-50 delivery-button m-t-10"
                                             variant="danger"
-                                            disabled={ !values.addressWard || !values.addressDistrict || !values.addressDetails || !orderInformation.name || !orderInformation.phone}
+                                            disabled={ !values.addressWard || !values.addressDistrict || !values.addressDetails || disableButton}
                                             onClick={() => {
                                                 this.props.submitAddress({
                                                     ...values,

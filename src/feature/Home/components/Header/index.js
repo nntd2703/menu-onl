@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import $ from 'jquery';
 import {FaShoppingCart} from "react-icons/fa";
+import NotiAddNew from "../Toast/NotiAddNewDishes";
 
 class HeaderComponent extends Component {
     constructor(props) {
@@ -121,8 +122,19 @@ class HeaderComponent extends Component {
                                     <button className="btn-show-sidebar m-l-33 trans-0-4"></button>
                                 </div>
                             </div>
+
+                            <div
+                                aria-live="polite"
+                                aria-atomic="true"
+                                style={{
+                                    position: 'relative',
+                                }}
+                            >
+                            <NotiAddNew/>
+                            </div>
                         </div>
                     </div>
+
                 </header>
 
                 <aside className="sidebar trans-0-4">

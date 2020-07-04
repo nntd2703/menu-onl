@@ -3,13 +3,11 @@ import {Item} from "./Item";
 import {NavigationItem} from "./NavItem";
 import {DISHES_DATA} from "../../../../utils/dishes-utils";
 import {connect} from "react-redux";
-import { loadingDishes, decreaseQuantity, increaseQuantity } from "../../OrderFoodAction";
+import {loadingDishes, decreaseQuantity, increaseQuantity} from "../../OrderFoodAction";
 
 class MenuItem extends React.Component {
     render() {
-        const {type, dishesList, loadingDishes, decreaseQuantity, increaseQuantity} = this.props;
-
-        const findDishesKey = false;
+        const {type, dishesList, loadingDishes, decreaseQuantity, increaseQuantity, findDishesKey} = this.props;
 
         const listCate = findDishesKey ? [{
             isSelected: true,
@@ -19,33 +17,27 @@ class MenuItem extends React.Component {
             }),
         }] : type;
 
+        const renderItem = (detail) => <Item
+            detail={detail}
+            key={detail.Code}
+            decreaseQuantity={decreaseQuantity}
+            increaseQuantity={increaseQuantity}
+        />;
+
         return (
             <>
                 {!findDishesKey ? <ul className="mp-menu-tab-nav nav nav-tabs" role="tablist">
                     {listCate.map((item) => <NavigationItem item={item} key={item.Code} navOnClicked={loadingDishes}/>)}
                 </ul> : null}
                 {listCate.map((item) => <div className="tab-content menu-tab-content" key={item.Code}>
-                    <div className={`tab-pane fade ${item.isSelected ? "show active" : null}`} id={item.key} role="tabpanel"
+                    <div className={`tab-pane fade ${item.isSelected ? "show active" : null}`} id={item.key}
+                         role="tabpanel"
                          aria-labelledby={item.key}>
                         <div className="tab-pane-details row">
                             {!findDishesKey ? (
-                                dishesList.filter((el) => el.parentKey === item.Code).map((detail) => (
-                                    <Item
-                                        detail={detail}
-                                        key={detail.Code}
-                                        decreaseQuantity={decreaseQuantity}
-                                        increaseQuantity={increaseQuantity}
-                                    />
-                                ))
+                                dishesList.filter((el) => el.parentKey === item.Code).map((detail) => (renderItem(detail)))
                             ) : (
-                                item.dishesList.map((detail) => (
-                                        <Item
-                                            detail={detail}
-                                            key={detail.Code}
-                                            decreaseQuantity={decreaseQuantity}
-                                            increaseQuantity={increaseQuantity}
-                                        />
-                                    )
+                                item.dishesList.map((detail) => (renderItem(detail))
                                 ))}
                         </div>
                     </div>
@@ -56,7 +48,7 @@ class MenuItem extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    const { dishesList, type } = state.foods;
+    const {dishesList, type} = state.foods;
     return {
         dishesList,
         type,

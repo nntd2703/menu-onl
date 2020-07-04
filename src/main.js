@@ -135,7 +135,6 @@ var btnHideSidebar = $('.btn-hide-sidebar');
 var sidebar = $('.sidebar');
 
 $(btnShowSidebar).on('click', function () {
-    console.log('aaaaaaaaaa')
     $(sidebar).addClass('show-sidebar');
     $(ovlSideBar).addClass('show-overlay-sidebar');
 })
