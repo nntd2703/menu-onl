@@ -1,0 +1,236 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _reactBootstrap = require("react-bootstrap");
+
+var _InputAddress = _interopRequireDefault(require("./InputAddress"));
+
+var _index = require("formik/dist/index");
+
+var yup = _interopRequireWildcard(require("yup"));
+
+var _OrderFoodAction = require("../../../OrderFoodAction");
+
+var _reactRedux = require("react-redux");
+
+var _constant = require("../../../../../utils/constant");
+
+var _BranchLayout = _interopRequireDefault(require("./BranchLayout"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+var schema = yup.object({
+  name: yup.string().required('Tên người đặt hàng không được để trống'),
+  phone: yup.string().required('Số điện thoại không được để trống')
+});
+
+var PreOrder = /*#__PURE__*/function (_React$Component) {
+  _inherits(PreOrder, _React$Component);
+
+  var _super = _createSuper(PreOrder);
+
+  function PreOrder(props) {
+    _classCallCheck(this, PreOrder);
+
+    return _super.call(this, props);
+  }
+
+  _createClass(PreOrder, [{
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          orderType = _this$props.orderType,
+          name = _this$props.name,
+          phoneNumber = _this$props.phoneNumber,
+          updateDeliveryInformation = _this$props.updateDeliveryInformation,
+          updateDeliveryType = _this$props.updateDeliveryType,
+          pickUpBranch = _this$props.pickUpBranch,
+          deliveryInformation = _this$props.deliveryInformation,
+          updatePhoneNumber = _this$props.updatePhoneNumber,
+          updateReceiverName = _this$props.updateReceiverName; //const isShowModel = !((orderType && name && phoneNumber) && (pickUpBranch || deliveryInformation));
+
+      var isShowModel = false;
+      var disableButton = !(orderType && name && phoneNumber);
+      var deliveryInformationLayout = null;
+
+      if (orderType === _constant.OPTION_TYPE.PickUp) {
+        deliveryInformationLayout = /*#__PURE__*/_react.default.createElement(PickUpLayout, {
+          disableButton: disableButton,
+          chooseBranchClicked: updateDeliveryInformation
+        });
+      } else if (orderType === _constant.OPTION_TYPE.Delivery) {
+        deliveryInformationLayout = /*#__PURE__*/_react.default.createElement(DeliveryLayout, {
+          disableButton: disableButton,
+          submitAddress: function submitAddress(values) {
+            updateDeliveryInformation(null, values);
+          }
+        });
+      }
+
+      return /*#__PURE__*/_react.default.createElement(_reactBootstrap.Modal, {
+        show: isShowModel,
+        size: "lg",
+        "aria-labelledby": "contained-modal-title-vcenter",
+        centered: true,
+        backdrop: "static",
+        keyboard: false
+      }, /*#__PURE__*/_react.default.createElement("div", {
+        className: "container"
+      }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Modal.Header, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Modal.Title, {
+        id: "contained-modal-title-vcenter",
+        className: "flex-c flex-m w-full"
+      }, "LET'S START ORDERING"))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Modal.Body, null, /*#__PURE__*/_react.default.createElement("p", {
+        className: "modal-title-cus tit10"
+      }, "Order Type"), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Group, {
+        controlId: "order-type"
+      }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Control, {
+        as: "select",
+        defaultValue: orderType,
+        onChange: function onChange(e) {
+          return updateDeliveryType(e.target.value);
+        }
+      }, /*#__PURE__*/_react.default.createElement("option", {
+        className: "d-none",
+        value: ""
+      }), /*#__PURE__*/_react.default.createElement("option", {
+        value: _constant.OPTION_TYPE.Delivery
+      }, "Delivery"), /*#__PURE__*/_react.default.createElement("option", {
+        value: _constant.OPTION_TYPE.PickUp
+      }, "Pick-up"))), /*#__PURE__*/_react.default.createElement(_index.Formik, {
+        validationSchema: schema,
+        initialValues: {
+          name: "",
+          phone: ""
+        },
+        onSubmit: this.onSubmit
+      }, function (_ref) {
+        var handleSubmit = _ref.handleSubmit,
+            handleChange = _ref.handleChange,
+            handleBlur = _ref.handleBlur,
+            values = _ref.values,
+            errors = _ref.errors,
+            setFieldValue = _ref.setFieldValue;
+        return /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form, {
+          noValidate: true,
+          onSubmit: handleSubmit
+        }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.FormGroup, {
+          className: "col-md-6 col-12"
+        }, /*#__PURE__*/_react.default.createElement("p", null, "Phone Number: "), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Control, {
+          type: 'number',
+          name: "phone",
+          value: values.phone,
+          onChange: handleChange,
+          onBlur: function onBlur() {
+            //will call API search Name depend on receiver phone number here
+            updatePhoneNumber(values.phone);
+          },
+          isInvalid: !!errors.phone
+        }), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Control.Feedback, {
+          type: "invalid"
+        }, errors.phone)), /*#__PURE__*/_react.default.createElement(_reactBootstrap.FormGroup, {
+          className: "col-md-6 col-12"
+        }, /*#__PURE__*/_react.default.createElement("p", null, "Name: "), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Control, {
+          type: "text",
+          name: "name",
+          value: values.name,
+          onChange: handleChange,
+          onBlur: function onBlur() {
+            updateReceiverName(values.name);
+          },
+          isInvalid: !!errors.name
+        }), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Control.Feedback, {
+          type: "invalid"
+        }, errors.name))));
+      }), /*#__PURE__*/_react.default.createElement("div", {
+        className: "col-12 p-0"
+      }, deliveryInformationLayout)));
+    }
+  }]);
+
+  return PreOrder;
+}(_react.default.Component);
+
+var DeliveryLayout = function DeliveryLayout(props) {
+  return /*#__PURE__*/_react.default.createElement(_InputAddress.default, {
+    disableButton: props.disableButton,
+    submitAddress: props.submitAddress
+  });
+};
+
+var PickUpLayout = function PickUpLayout(props) {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("p", {
+    className: "modal-title-cus tit10"
+  }, "Pick-up Restaurant"), /*#__PURE__*/_react.default.createElement("div", {
+    className: "branch"
+  }, _constant.BRANCH.map(function (item) {
+    return /*#__PURE__*/_react.default.createElement(_BranchLayout.default, {
+      key: item.key,
+      item: item,
+      chooseBranchClicked: props.chooseBranchClicked,
+      disableButton: props.disableButton
+    });
+  })));
+};
+
+var mapStateToProps = function mapStateToProps(state) {
+  return _objectSpread({}, state.deliveryInformation);
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    updatePhoneNumber: function updatePhoneNumber(value) {
+      dispatch((0, _OrderFoodAction.updatePhoneNumber)(value));
+    },
+    updateReceiverName: function updateReceiverName(value) {
+      dispatch((0, _OrderFoodAction.updateReceiverName)(value));
+    },
+    updateDeliveryInformation: function updateDeliveryInformation(pickUpBranch, deliveryInformation) {
+      dispatch((0, _OrderFoodAction.updateDeliveryInformation)(pickUpBranch, deliveryInformation));
+    },
+    updateDeliveryType: function updateDeliveryType(orderType) {
+      dispatch((0, _OrderFoodAction.updateDeliveryType)(orderType));
+    }
+  };
+};
+
+var _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(PreOrder);
+
+exports.default = _default;
